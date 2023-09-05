@@ -24,6 +24,7 @@ List<String> bagsLabel = [
   'other'
 ];
 
+// ignore: camel_case_types
 class bagsCategory extends StatelessWidget {
   const bagsCategory({super.key});
 

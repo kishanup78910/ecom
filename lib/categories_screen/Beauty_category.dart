@@ -1,3 +1,8 @@
+// ignore: file_names
+// ignore: file_names
+// ignore: file_names
+// ignore: file_names
+// ignore: file_names
 // ignore_for_file: sort_child_properties_last, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
@@ -20,6 +25,7 @@ List<String> beautyLabel = [
   'other'
 ];
 
+// ignore: camel_case_types
 class beautyCategory extends StatelessWidget {
   const beautyCategory({super.key});
 
@@ -52,7 +58,10 @@ class beautyCategory extends StatelessWidget {
                     height: 70,
                     width: 70,
                   ),
-                  Text(beautyLabel[index])
+                  Text(
+                    beautyLabel[index],
+                    style: TextStyle(fontSize: 12),
+                  )
                 ],
               );
             }),

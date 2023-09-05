@@ -1,5 +1,6 @@
 // ignore_for_file: sort_child_properties_last, non_constant_identifier_names
 
+import 'package:ecom/minor_screen/subcatag_products.dart';
 import 'package:flutter/material.dart';
 
 List<String> MensCat = [
@@ -48,17 +49,28 @@ class MenCategory extends StatelessWidget {
             crossAxisSpacing: 15,
             crossAxisCount: 3,
             children: List.generate(MensCat.length, (index) {
-              return Column(
-                children: [
-                  SizedBox(
-                    child: Image(
-                      image: AssetImage(MensCat[index]),
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SubCategory(
+                                subCatName: menLable[index],
+                                mainCateName: 'men',
+                              )));
+                },
+                child: Column(
+                  children: [
+                    SizedBox(
+                      child: Image(
+                        image: AssetImage(MensCat[index]),
+                      ),
+                      height: 70,
+                      width: 70,
                     ),
-                    height: 70,
-                    width: 70,
-                  ),
-                  Text(menLable[index])
-                ],
+                    Text(menLable[index])
+                  ],
+                ),
               );
             }),
           ),

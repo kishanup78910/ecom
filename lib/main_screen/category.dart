@@ -1,4 +1,11 @@
+import 'package:ecom/categories_screen/Beauty_category.dart';
+import 'package:ecom/categories_screen/HomeAndgardenCateogires.dart';
+import 'package:ecom/categories_screen/accesories.dart';
+import 'package:ecom/categories_screen/bags_category.dart';
+import 'package:ecom/categories_screen/electronics_category.dart';
+import 'package:ecom/categories_screen/kids_category.dart';
 import 'package:ecom/categories_screen/main_category.dart';
+import 'package:ecom/categories_screen/shoes_cateogory.dart';
 import 'package:ecom/categories_screen/women_category.dart';
 import 'package:ecom/main_screen/home.dart';
 import 'package:flutter/material.dart';
@@ -120,27 +127,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
         children: const [
           MenCategory(),
           WowomentCategory(),
-          Center(
-            child: Text("Shoes Category"),
-          ),
-          Center(
-            child: Text("Bags Category"),
-          ),
-          Center(
-            child: Text("Electronics Category"),
-          ),
-          Center(
-            child: Text("Accessories Category"),
-          ),
-          Center(
-            child: Text("Home And Garden Category"),
-          ),
-          Center(
-            child: Text("Kids Category"),
-          ),
-          Center(
-            child: Text("Beauty Category"),
-          ),
+          ShoesCategory(),
+          bagsCategory(),
+          electronicsCategory(),
+          accessoriesCategory(),
+          homegardenCategory(),
+          kidsCategory(),
+          beautyCategory(),
         ],
       ),
     );

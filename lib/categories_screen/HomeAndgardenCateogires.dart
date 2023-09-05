@@ -1,3 +1,9 @@
+// ignore: file_names
+// ignore: file_names
+// ignore: file_names
+// ignore: file_names
+// ignore: file_names
+// ignore: file_names
 // ignore_for_file: sort_child_properties_last, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
@@ -28,6 +34,7 @@ List<String> homegardenLabel = [
   'other'
 ];
 
+// ignore: camel_case_types
 class homegardenCategory extends StatelessWidget {
   const homegardenCategory({super.key});
 

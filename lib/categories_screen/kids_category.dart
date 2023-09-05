@@ -16,7 +16,6 @@ List<String> kidssCat = [
   'images/kids/kids10.jpg',
   'images/kids/kids11.jpg',
   'images/kids/kids12.jpg',
-  'images/kids/kids13.jpg',
 ];
 
 List<String> kidsLabel = [
@@ -35,6 +34,7 @@ List<String> kidsLabel = [
   'other'
 ];
 
+// ignore: camel_case_types
 class kidsCategory extends StatelessWidget {
   const kidsCategory({super.key});
 

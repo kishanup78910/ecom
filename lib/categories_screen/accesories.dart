@@ -27,6 +27,7 @@ List<String> accessoriesLabel = [
   'other'
 ];
 
+// ignore: camel_case_types
 class accessoriesCategory extends StatelessWidget {
   const accessoriesCategory({super.key});
 

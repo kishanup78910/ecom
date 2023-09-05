@@ -36,6 +36,7 @@ List<String> electronicsLabel = [
   'other'
 ];
 
+// ignore: camel_case_types
 class electronicsCategory extends StatelessWidget {
   const electronicsCategory({super.key});
 
