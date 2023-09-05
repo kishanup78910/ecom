@@ -2,34 +2,26 @@
 
 import 'package:flutter/material.dart';
 
-List<String> womensCat = [
-  'images/women/women0.jpg',
-  'images/women/women1.jpg',
-  'images/women/women2.jpg',
-  'images/women/women3.jpg',
-  'images/women/women4.jpg',
-  'images/women/women5.jpg',
-  'images/women/women6.jpg',
-  'images/women/women7.jpg',
-  'images/women/women8.jpg',
-  'images/women/women9.jpg',
+List<String> beautysCat = [
+  'images/beauty/beauty0.jpg',
+  'images/beauty/beauty1.jpg',
+  'images/beauty/beauty2.jpg',
+  'images/beauty/beauty3.jpg',
+  'images/beauty/beauty4.jpg',
+  'images/beauty/beauty5.jpg',
 ];
 
-List<String> womenLabel = [
-  'dress',
-  '2pcs sets',
-  't-shirt',
-  'top',
-  'skirt',
-  'jeans',
-  'pants',
-  'coat',
-  'jacket',
+List<String> beautyLabel = [
+  'body care',
+  'hair care',
+  'men perfume',
+  'women perfume',
+  'make up',
   'other'
 ];
 
-class WowomentCategory extends StatelessWidget {
-  const WowomentCategory({super.key});
+class beautyCategory extends StatelessWidget {
+  const beautyCategory({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +31,7 @@ class WowomentCategory extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.all(30.0),
           child: Text(
-            'Women',
+            'beauty',
             style: TextStyle(
                 fontSize: 24, fontWeight: FontWeight.bold, letterSpacing: 1.5),
           ),
@@ -50,17 +42,17 @@ class WowomentCategory extends StatelessWidget {
             mainAxisSpacing: 70,
             crossAxisSpacing: 15,
             crossAxisCount: 3,
-            children: List.generate(womensCat.length, (index) {
+            children: List.generate(beautysCat.length, (index) {
               return Column(
                 children: [
                   SizedBox(
                     child: Image(
-                      image: AssetImage(womensCat[index]),
+                      image: AssetImage(beautysCat[index]),
                     ),
                     height: 70,
                     width: 70,
                   ),
-                  Text(womenLabel[index])
+                  Text(beautyLabel[index])
                 ],
               );
             }),

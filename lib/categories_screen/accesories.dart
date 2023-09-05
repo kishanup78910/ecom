@@ -2,34 +2,33 @@
 
 import 'package:flutter/material.dart';
 
-List<String> womensCat = [
-  'images/women/women0.jpg',
-  'images/women/women1.jpg',
-  'images/women/women2.jpg',
-  'images/women/women3.jpg',
-  'images/women/women4.jpg',
-  'images/women/women5.jpg',
-  'images/women/women6.jpg',
-  'images/women/women7.jpg',
-  'images/women/women8.jpg',
-  'images/women/women9.jpg',
+List<String> accessoriessCat = [
+  'images/accessories/accessories0.jpg',
+  'images/accessories/accessories1.jpg',
+  'images/accessories/accessories2.jpg',
+  'images/accessories/accessories3.jpg',
+  'images/accessories/accessories4.jpg',
+  'images/accessories/accessories5.jpg',
+  'images/accessories/accessories6.jpg',
+  'images/accessories/accessories7.jpg',
 ];
 
-List<String> womenLabel = [
-  'dress',
-  '2pcs sets',
-  't-shirt',
-  'top',
-  'skirt',
-  'jeans',
-  'pants',
-  'coat',
-  'jacket',
+List<String> accessoriesLabel = [
+  'hat',
+  'men sunglass',
+  'w sunglass',
+  'classic watch',
+  'gloves',
+  'belt waist',
+  'ring',
+  'necklace',
+  'scarf set',
+  'anklet',
   'other'
 ];
 
-class WowomentCategory extends StatelessWidget {
-  const WowomentCategory({super.key});
+class accessoriesCategory extends StatelessWidget {
+  const accessoriesCategory({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,7 @@ class WowomentCategory extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.all(30.0),
           child: Text(
-            'Women',
+            'accessories',
             style: TextStyle(
                 fontSize: 24, fontWeight: FontWeight.bold, letterSpacing: 1.5),
           ),
@@ -50,17 +49,17 @@ class WowomentCategory extends StatelessWidget {
             mainAxisSpacing: 70,
             crossAxisSpacing: 15,
             crossAxisCount: 3,
-            children: List.generate(womensCat.length, (index) {
+            children: List.generate(accessoriessCat.length, (index) {
               return Column(
                 children: [
                   SizedBox(
                     child: Image(
-                      image: AssetImage(womensCat[index]),
+                      image: AssetImage(accessoriessCat[index]),
                     ),
                     height: 70,
                     width: 70,
                   ),
-                  Text(womenLabel[index])
+                  Text(accessoriesLabel[index])
                 ],
               );
             }),

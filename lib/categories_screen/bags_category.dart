@@ -2,34 +2,30 @@
 
 import 'package:flutter/material.dart';
 
-List<String> womensCat = [
-  'images/women/women0.jpg',
-  'images/women/women1.jpg',
-  'images/women/women2.jpg',
-  'images/women/women3.jpg',
-  'images/women/women4.jpg',
-  'images/women/women5.jpg',
-  'images/women/women6.jpg',
-  'images/women/women7.jpg',
-  'images/women/women8.jpg',
-  'images/women/women9.jpg',
+List<String> bagssCat = [
+  'images/bags/bags0.jpg',
+  'images/bags/bags1.jpg',
+  'images/bags/bags2.jpg',
+  'images/bags/bags3.jpg',
+  'images/bags/bags4.jpg',
+  'images/bags/bags5.jpg',
+  'images/bags/bags6.jpg',
+  'images/bags/bags7.jpg',
 ];
 
-List<String> womenLabel = [
-  'dress',
-  '2pcs sets',
-  't-shirt',
-  'top',
-  'skirt',
-  'jeans',
-  'pants',
-  'coat',
-  'jacket',
+List<String> bagsLabel = [
+  'wallet',
+  'clutch',
+  'chest bag',
+  'back pack',
+  'business bags',
+  'laptop bags',
+  'women bags',
   'other'
 ];
 
-class WowomentCategory extends StatelessWidget {
-  const WowomentCategory({super.key});
+class bagsCategory extends StatelessWidget {
+  const bagsCategory({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +35,7 @@ class WowomentCategory extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.all(30.0),
           child: Text(
-            'Women',
+            'bags',
             style: TextStyle(
                 fontSize: 24, fontWeight: FontWeight.bold, letterSpacing: 1.5),
           ),
@@ -50,17 +46,17 @@ class WowomentCategory extends StatelessWidget {
             mainAxisSpacing: 70,
             crossAxisSpacing: 15,
             crossAxisCount: 3,
-            children: List.generate(womensCat.length, (index) {
+            children: List.generate(bagssCat.length, (index) {
               return Column(
                 children: [
                   SizedBox(
                     child: Image(
-                      image: AssetImage(womensCat[index]),
+                      image: AssetImage(bagssCat[index]),
                     ),
                     height: 70,
                     width: 70,
                   ),
-                  Text(womenLabel[index])
+                  Text(bagsLabel[index])
                 ],
               );
             }),
