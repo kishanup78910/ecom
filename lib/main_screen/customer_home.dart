@@ -1,3 +1,5 @@
+import 'package:ecom/main_screen/CartScreen.dart';
+import 'package:ecom/main_screen/Stores.dart';
 import 'package:ecom/main_screen/category.dart';
 import 'package:ecom/main_screen/home.dart';
 import 'package:flutter/material.dart';
@@ -14,12 +16,8 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
   final List<Widget> _tabs = [
     const HomeScreen(),
     const CategoryScreen(),
-    const Center(
-      child: Text("Stores Screen"),
-    ),
-    const Center(
-      child: Text("Cart Screen"),
-    ),
+    const StoresScreen(),
+    CartScreen(),
     const Center(
       child: Text("Profile Screen"),
     ),
