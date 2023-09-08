@@ -15,3 +15,14 @@ How to Integrate Stripe Payment Account and link it to your application to recei
 How to add animations to your design
 How to save data locally into SQL Database
 How to Push Notifications Automatically to suppliers and customers to keep track of their orders
+
+
+
+
+Things I have leaned During this project 
+
+1- How to use animation 
+2- UI enhancement
+3- How to improve my code performance /
+4- How to extract widget 
+5- I use a flutter packgae for the animation of text in welcome screen named ' animated_text_kit ' for the animation of text
