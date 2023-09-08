@@ -1,6 +1,7 @@
 // ignore: file_names
 // ignore: file_names
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:ecom/main_screen/supplier_home.dart';
 import 'package:ecom/widgets/YelloButton.dart';
 import 'package:flutter/material.dart';
 
@@ -172,7 +173,14 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                                 ),
                                 YellowButton(
                                     label: 'Log In',
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const SupplierHomeScreen()),
+                                      );
+                                    },
                                     width: 0.25),
                                 Padding(
                                   padding: const EdgeInsets.only(right: 8.0),
