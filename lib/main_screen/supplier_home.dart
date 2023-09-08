@@ -1,3 +1,4 @@
+import 'package:ecom/main_screen/Dashboard.dart';
 import 'package:ecom/main_screen/Stores.dart';
 import 'package:ecom/main_screen/category.dart';
 import 'package:ecom/main_screen/home.dart';
@@ -16,9 +17,7 @@ class _SupplierHomeScreenState extends State<SupplierHomeScreen> {
     const HomeScreen(),
     const CategoryScreen(),
     const StoresScreen(),
-    const Center(
-      child: Text("DashBoard"),
-    ),
+    const DashBoardScreen(),
     const Center(
       child: Text("Upload"),
     ),
