@@ -90,10 +90,29 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   image: AssetImage('images/inapp/logo.jpg'),
                 ),
               ),
-              const Text(
-                "SHOP",
-                style: TextStyle(color: Colors.white, fontSize: 30),
+
+              SizedBox(
+                height: 80,
+                child: DefaultTextStyle(
+                  style: const TextStyle(
+                      color: Colors.lightBlueAccent,
+                      fontFamily: 'Acme',
+                      fontSize: 30),
+                  child: AnimatedTextKit(
+                    animatedTexts: [
+                      RotateAnimatedText('Buy'),
+                      RotateAnimatedText('Shop'),
+                      RotateAnimatedText('Duck Store'),
+                    ],
+                    repeatForever: true,
+                    isRepeatingAnimation: true,
+                  ),
+                ),
               ),
+              //  const Text(
+              //  "SHOP",
+              //   style: TextStyle(color: Colors.white, fontSize: 30),
+              // ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 25.0),
                 child: Row(
@@ -239,7 +258,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     ),
 
                     GoogleFacebookLogin(
-                        label: 'Google',
+                        label: 'Guest',
                         onPressed: () {},
                         child: const Icon(
                           Icons.person,
