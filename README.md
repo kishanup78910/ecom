@@ -1,16 +1,28 @@
-# ecom
+ECOM - - Duck Store 
 
-A new Flutter project.
+This is one of my major project in flutter . 
 
-## Getting Started
+I have developed this application using dart in which i  learn many things like 
 
-This project is a starting point for a Flutter application.
+How to use flutter widgets and get the most benefits of each widget
+How to create a new firebase project and install it to IOS and Android.
+How to allow Users to Authenticate with your application .
+How to allow suppliers to upload Products to their stores or to application in general
+How to Stream Data again from firebase Cloud to your application and arrange them in pages and categories
+How to allow Customers to Add Items to Cart and help them to place an Order
+How to make your application intelligent and treat the input data we are getting from users
+How to Integrate Stripe Payment Account and link it to your application to receive payments
+How to add animations to your design
+How to save data locally into SQL Database
+How to Push Notifications Automatically to suppliers and customers to keep track of their orders
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+Things I have leaned During this project 
+
+1- How to use animation 
+2- UI enhancement
+3- How to improve my code performance /
+4- How to extract widget 
+5- I use a flutter packgae for the animation of text in welcome screen named ' animated_text_kit ' for the animation of text
