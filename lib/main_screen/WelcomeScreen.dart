@@ -1,4 +1,6 @@
 // ignore: file_names
+// ignore: file_names
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:ecom/widgets/YelloButton.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +21,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
 
     _controller =
         AnimationController(vsync: this, duration: const Duration(seconds: 2));
+    _controller.repeat();
     super.initState();
   }
 
@@ -37,10 +40,49 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             // crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const Text(
-                "WELCOME",
-                style: TextStyle(color: Colors.white, fontSize: 30),
+              AnimatedTextKit(
+                animatedTexts: [
+                  ColorizeAnimatedText(
+                    'WELCOME',
+                    textStyle: const TextStyle(
+                      fontSize: 45,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Acme',
+                    ),
+                    colors: [
+                      Colors.yellowAccent,
+                      Colors.red,
+                      Colors.blueAccent,
+                      Colors.green,
+                      Colors.purple,
+                      Colors.teal
+                    ],
+                  ),
+                  ColorizeAnimatedText(
+                    'DUCK STORE',
+                    textStyle: const TextStyle(
+                      fontSize: 45,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Acme',
+                    ),
+                    colors: [
+                      Colors.yellowAccent,
+                      Colors.red,
+                      Colors.blueAccent,
+                      Colors.green,
+                      Colors.purple,
+                      Colors.teal
+                    ],
+                  ),
+                ],
+                repeatForever: true,
+                isRepeatingAnimation: true,
               ),
+
+              // const Text(
+              //   "WELCOME",
+              //   style: TextStyle(color: Colors.white, fontSize: 30),
+              // ),
               const SizedBox(
                 height: 120,
                 width: 200,
