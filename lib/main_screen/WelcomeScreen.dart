@@ -1,6 +1,7 @@
 // ignore: file_names
 // ignore: file_names
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:ecom/auth/customer_signUp.dart';
 import 'package:ecom/widgets/YelloButton.dart';
 import 'package:flutter/material.dart';
 
@@ -226,7 +227,16 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                                 width: 0.25),
                           ),
                           YellowButton(
-                              label: 'Sign Up', onPressed: () {}, width: 0.25),
+                              label: 'Sign Up',
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const CustomerRegister()),
+                                );
+                              },
+                              width: 0.25),
                           AnimatedBuilder(
                             animation: _controller.view,
                             builder: (context, child) {

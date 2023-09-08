@@ -1,4 +1,5 @@
 // ignore: file_names
+import 'package:ecom/customerScreen/wishlist.dart';
 import 'package:ecom/main_screen/CartScreen.dart';
 import 'package:ecom/widgets/AppBarWidgets.dart';
 import 'package:flutter/material.dart';
@@ -158,7 +159,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const WishListScreen(),
+                                ),
+                              );
+                            },
                           ),
                         ),
                       ],
