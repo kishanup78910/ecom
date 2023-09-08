@@ -1,3 +1,4 @@
+import 'package:ecom/auth/customer_signUp.dart';
 import 'package:ecom/main_screen/WelcomeScreen.dart';
 import 'package:ecom/main_screen/customer_home.dart';
 import 'package:ecom/main_screen/supplier_home.dart';
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/welcome_screen': (context) => const WelcomeScreen(),
         '/customer_home': (context) => const CustomerHomeScreen(),
-        '/supplier_home': (context) => const SupplierHomeScreen()
+        '/supplier_home': (context) => const SupplierHomeScreen(),
+        '/customer_signup': (context) => const CustomerRegister(),
       },
     );
   }
