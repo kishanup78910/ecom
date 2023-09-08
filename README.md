@@ -26,3 +26,7 @@ Things I have leaned During this project
 3- How to improve my code performance /
 4- How to extract widget 
 5- I use a flutter packgae for the animation of text in welcome screen named ' animated_text_kit ' for the animation of text
+
+
+
+After making welcome screen i move to supplier home Screren .
