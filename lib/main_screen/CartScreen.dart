@@ -7,7 +7,8 @@ import 'package:ecom/widgets/YelloButton.dart';
 import 'package:flutter/material.dart';
 
 class CartScreen extends StatefulWidget {
-  const CartScreen({super.key});
+  final Widget? back;
+  const CartScreen({super.key, this.back});
 
   @override
   State<CartScreen> createState() => _CartScreenState();
@@ -18,6 +19,7 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: widget.back,
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
@@ -44,12 +46,14 @@ class _CartScreenState extends State<CartScreen> {
             child: MaterialButton(
               minWidth: MediaQuery.of(context).size.width * 0.6,
               onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const CustomerHomeScreen(),
-                  ),
-                );
+                Navigator.canPop(context)
+                    ? Navigator.pop(context)
+                    : Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const CustomerHomeScreen(),
+                        ),
+                      );
               },
               child: const Text(
                 'Continue Shopping',

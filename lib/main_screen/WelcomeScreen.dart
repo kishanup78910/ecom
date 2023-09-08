@@ -1,7 +1,6 @@
 // ignore: file_names
 // ignore: file_names
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:ecom/main_screen/supplier_home.dart';
 import 'package:ecom/widgets/YelloButton.dart';
 import 'package:flutter/material.dart';
 
@@ -174,11 +173,9 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                                 YellowButton(
                                     label: 'Log In',
                                     onPressed: () {
-                                      Navigator.pushReplacement(
+                                      Navigator.pushReplacementNamed(
                                         context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const SupplierHomeScreen()),
+                                        '/supplier_home',
                                       );
                                     },
                                     width: 0.25),
@@ -219,7 +216,14 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                           Padding(
                             padding: const EdgeInsets.all(12.0),
                             child: YellowButton(
-                                label: 'Log In', onPressed: () {}, width: 0.25),
+                                label: 'Log In',
+                                onPressed: () {
+                                  Navigator.pushReplacementNamed(
+                                    context,
+                                    '/customer_home',
+                                  );
+                                },
+                                width: 0.25),
                           ),
                           YellowButton(
                               label: 'Sign Up', onPressed: () {}, width: 0.25),

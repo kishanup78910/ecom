@@ -1,4 +1,6 @@
 // ignore: file_names
+import 'package:ecom/main_screen/CartScreen.dart';
+import 'package:ecom/widgets/AppBarWidgets.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -122,7 +124,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const CartScreen(
+                                    back: AppBarBackButton(),
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         ),
                         Container(
@@ -250,7 +261,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 RepeatedListTile(
                                     icon: Icons.logout,
                                     title: 'Logout',
-                                    onPressed: () {}),
+                                    onPressed: () {
+                                      Navigator.pushReplacementNamed(
+                                          context, '/welcome_screen');
+                                    }),
                               ],
                             ),
                           ),
