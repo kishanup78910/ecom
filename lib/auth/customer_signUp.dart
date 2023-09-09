@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ecom/widgets/Auth_widget.dart';
 import 'package:ecom/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
@@ -86,13 +88,15 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                       const AuthHeaderLabel(headerLable: 'Sign Up'),
                       Row(
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.symmetric(
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
                                 vertical: 20.0, horizontal: 40),
                             child: CircleAvatar(
-                              radius: 60,
-                              backgroundColor: Colors.purpleAccent,
-                            ),
+                                radius: 60,
+                                backgroundColor: Colors.purpleAccent,
+                                backgroundImage: _imageFile == null
+                                    ? null
+                                    : FileImage(File(_imageFile!.path))),
                           ),
                           Column(
                             children: [
