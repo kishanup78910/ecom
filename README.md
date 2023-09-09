@@ -30,3 +30,10 @@ Things I have leaned During this project
 
 
 After making welcome screen i move to supplier home Screren .
+
+
+there is also new concept in UI refractoring use copywith option to overwrite something which is present already . 
+
+
+
+![signup](https://github.com/kishanup78910/ecom/assets/79304976/f9cd6b5e-2aee-4279-b087-9580e0815f91)
