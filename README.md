@@ -37,3 +37,6 @@ there is also new concept in UI refractoring use copywith option to overwrite so
 
 
 ![signup](https://github.com/kishanup78910/ecom/assets/79304976/f9cd6b5e-2aee-4279-b087-9580e0815f91)
+
+
+Regular expression is a way to validate the email like things , it is good for formating the value and it is use for cross validation of user entry . 
