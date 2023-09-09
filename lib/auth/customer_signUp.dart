@@ -1,6 +1,7 @@
 import 'package:ecom/widgets/Auth_widget.dart';
 import 'package:ecom/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 // final TextEditingController _nameController = TextEditingController();
 // final TextEditingController _emailController = TextEditingController();
@@ -21,6 +22,50 @@ class _CustomerRegisterState extends State<CustomerRegister> {
   final GlobalKey<ScaffoldMessengerState> _scaffoldKey =
       GlobalKey<ScaffoldMessengerState>();
   bool passwordVisibilty = false;
+
+  final ImagePicker _picker = ImagePicker();
+
+  XFile? _imageFile;
+  dynamic _pickedImageError;
+
+  void _pickImageFromCamera() async {
+    try {
+      final pickedImage = await _picker.pickImage(
+          source: ImageSource.camera,
+          maxHeight: 300,
+          maxWidth: 300,
+          imageQuality: 95);
+
+      setState(() {
+        _imageFile = pickedImage;
+      });
+    } catch (e) {
+      setState(() {
+        _pickedImageError = e;
+      });
+      print(_pickedImageError);
+    }
+  }
+
+  void _pickImageFromGallery() async {
+    try {
+      final pickedImage = await _picker.pickImage(
+          source: ImageSource.gallery,
+          maxHeight: 300,
+          maxWidth: 300,
+          imageQuality: 95);
+
+      setState(() {
+        _imageFile = pickedImage;
+      });
+    } catch (e) {
+      setState(() {
+        _pickedImageError = e;
+      });
+      print(_pickedImageError);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScaffoldMessenger(
@@ -62,7 +107,9 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                                 child: IconButton(
                                   icon: const Icon(Icons.camera_alt),
                                   color: Colors.white,
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    _pickImageFromCamera();
+                                  },
                                 ),
                               ),
                               const SizedBox(
@@ -79,7 +126,9 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                                 child: IconButton(
                                   icon: const Icon(Icons.photo),
                                   color: Colors.white,
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    _pickImageFromGallery();
+                                  },
                                 ),
                               ),
                             ],
