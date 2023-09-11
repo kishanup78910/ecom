@@ -2,6 +2,8 @@
 import 'package:ecom/customerScreen/wishlist.dart';
 import 'package:ecom/main_screen/CartScreen.dart';
 import 'package:ecom/widgets/AppBarWidgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -267,12 +269,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ),
                                 ),
                                 RepeatedListTile(
-                                    icon: Icons.logout,
-                                    title: 'Logout',
-                                    onPressed: () {
-                                      Navigator.pushReplacementNamed(
-                                          context, '/welcome_screen');
-                                    }),
+                                  icon: Icons.logout,
+                                  title: 'Logout',
+                                  onPressed: () async {
+                                    // Navigator.pushReplacementNamed(
+                                    //     context, '/welcome_screen');
+
+                                    showCupertinoModalPopup<void>(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          CupertinoAlertDialog(
+                                        title: const Text('Log Out'),
+                                        content: const Text(
+                                            'Are you sure to log out ?'),
+                                        actions: <CupertinoDialogAction>[
+                                          CupertinoDialogAction(
+                                            /// This parameter indicates this action is the default,
+                                            /// and turns the action's text to bold text.
+                                            isDefaultAction: true,
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text('No'),
+                                          ),
+                                          CupertinoDialogAction(
+                                            /// This parameter indicates the action would perform
+                                            /// a destructive action such as deletion, and turns
+                                            /// the action's text color to red.
+                                            isDestructiveAction: true,
+                                            onPressed: () async {
+                                              await FirebaseAuth.instance
+                                                  .signOut();
+                                              Navigator.pushReplacementNamed(
+                                                  context, '/welcome_screen');
+                                            },
+                                            child: const Text('Yes'),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
                               ],
                             ),
                           ),
@@ -348,6 +385,33 @@ class ProfileHeaderLabel extends StatelessWidget {
           ),
         ),
       ]),
+    );
+  }
+}
+
+class myAlertDialogue extends StatelessWidget {
+  const myAlertDialogue({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Log Out'),
+      content: const Text('Are you sure to log out ?'),
+      actions: <Widget>[
+        TextButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('No'),
+        ),
+        TextButton(
+          onPressed: () async {
+            await FirebaseAuth.instance.signOut();
+            Navigator.pushReplacementNamed(context, '/welcome_screen');
+          },
+          child: const Text('Yes'),
+        ),
+      ],
     );
   }
 }

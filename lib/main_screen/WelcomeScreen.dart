@@ -3,6 +3,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:ecom/auth/customer_signUp.dart';
 import 'package:ecom/widgets/YelloButton.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -279,14 +280,29 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                       ),
                     ),
 
-                    GoogleFacebookLogin(
-                        label: 'Guest',
-                        onPressed: () {},
-                        child: const Icon(
-                          Icons.person,
-                          size: 55,
-                          color: Colors.lightBlueAccent,
-                        )),
+                    InkWell(
+                      onTap: () async {
+                        await FirebaseAuth.instance.signInAnonymously();
+                        Navigator.pushReplacementNamed(
+                          context,
+                          '/supplier_home',
+                        );
+                        Navigator.pushReplacementNamed(
+                          context,
+                          '/welcome_screen',
+                        );
+                      },
+                      child: GoogleFacebookLogin(
+                          label: 'Guest',
+                          onPressed: () async {
+                            await FirebaseAuth.instance.signInAnonymously();
+                          },
+                          child: const Icon(
+                            Icons.person,
+                            size: 55,
+                            color: Colors.lightBlueAccent,
+                          )),
+                    ),
                   ],
                 ),
               )

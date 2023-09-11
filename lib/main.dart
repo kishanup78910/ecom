@@ -1,11 +1,17 @@
 import 'package:ecom/auth/customer_signUp.dart';
+import 'package:ecom/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:ecom/main_screen/WelcomeScreen.dart';
 import 'package:ecom/main_screen/customer_home.dart';
 import 'package:ecom/main_screen/supplier_home.dart';
 
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 

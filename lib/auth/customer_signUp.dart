@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'dart:io';
 
 import 'package:ecom/widgets/Auth_widget.dart';
@@ -262,10 +263,21 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                         mainButtonLabel: 'Sign Up',
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            myMessageHnadler.showSnackBar(
-                              _scaffoldKey,
-                              'Your Id created successfully!😊',
-                            );
+                            if (_imageFile != null) {
+                              _formKey.currentState!.reset();
+                              setState(() {
+                                _imageFile = null;
+                              });
+                              myMessageHnadler.showSnackBar(
+                                _scaffoldKey,
+                                'Your id created 😊😊',
+                              );
+                            } else {
+                              myMessageHnadler.showSnackBar(
+                                _scaffoldKey,
+                                'Please pick an image',
+                              );
+                            }
                           } else {
                             myMessageHnadler.showSnackBar(
                               _scaffoldKey,
