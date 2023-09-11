@@ -1,6 +1,10 @@
+// ignore: file_names
+import 'dart:io';
+
 import 'package:ecom/widgets/Auth_widget.dart';
 import 'package:ecom/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 // final TextEditingController _nameController = TextEditingController();
 // final TextEditingController _emailController = TextEditingController();
@@ -21,6 +25,50 @@ class _CustomerRegisterState extends State<CustomerRegister> {
   final GlobalKey<ScaffoldMessengerState> _scaffoldKey =
       GlobalKey<ScaffoldMessengerState>();
   bool passwordVisibilty = false;
+
+  final ImagePicker _picker = ImagePicker();
+
+  XFile? _imageFile;
+  dynamic _pickedImageError;
+
+  void _pickImageFromCamera() async {
+    try {
+      final pickedImage = await _picker.pickImage(
+          source: ImageSource.camera,
+          maxHeight: 300,
+          maxWidth: 300,
+          imageQuality: 95);
+
+      setState(() {
+        _imageFile = pickedImage;
+      });
+    } catch (e) {
+      setState(() {
+        _pickedImageError = e;
+      });
+      print(_pickedImageError);
+    }
+  }
+
+  void _pickImageFromGallery() async {
+    try {
+      final pickedImage = await _picker.pickImage(
+          source: ImageSource.gallery,
+          maxHeight: 300,
+          maxWidth: 300,
+          imageQuality: 95);
+
+      setState(() {
+        _imageFile = pickedImage;
+      });
+    } catch (e) {
+      setState(() {
+        _pickedImageError = e;
+      });
+      print(_pickedImageError);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScaffoldMessenger(
@@ -41,13 +89,15 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                       const AuthHeaderLabel(headerLable: 'Sign Up'),
                       Row(
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.symmetric(
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
                                 vertical: 20.0, horizontal: 40),
                             child: CircleAvatar(
-                              radius: 60,
-                              backgroundColor: Colors.purpleAccent,
-                            ),
+                                radius: 60,
+                                backgroundColor: Colors.purpleAccent,
+                                backgroundImage: _imageFile == null
+                                    ? null
+                                    : FileImage(File(_imageFile!.path))),
                           ),
                           Column(
                             children: [
@@ -62,7 +112,9 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                                 child: IconButton(
                                   icon: const Icon(Icons.camera_alt),
                                   color: Colors.white,
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    _pickImageFromCamera();
+                                  },
                                 ),
                               ),
                               const SizedBox(
@@ -79,7 +131,9 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                                 child: IconButton(
                                   icon: const Icon(Icons.photo),
                                   color: Colors.white,
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    _pickImageFromGallery();
+                                  },
                                 ),
                               ),
                             ],
@@ -209,10 +263,21 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                         mainButtonLabel: 'Sign Up',
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            myMessageHnadler.showSnackBar(
-                              _scaffoldKey,
-                              'Your Id created successfully!😊',
-                            );
+                            if (_imageFile != null) {
+                              _formKey.currentState!.reset();
+                              setState(() {
+                                _imageFile = null;
+                              });
+                              myMessageHnadler.showSnackBar(
+                                _scaffoldKey,
+                                'Your id created 😊😊',
+                              );
+                            } else {
+                              myMessageHnadler.showSnackBar(
+                                _scaffoldKey,
+                                'Please pick an image',
+                              );
+                            }
                           } else {
                             myMessageHnadler.showSnackBar(
                               _scaffoldKey,
