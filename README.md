@@ -40,3 +40,6 @@ there is also new concept in UI refractoring use copywith option to overwrite so
 
 
 Regular expression is a way to validate the email like things , it is good for formating the value and it is use for cross validation of user entry . 
+
+
+in this project i have added anonymous athetication  . 
