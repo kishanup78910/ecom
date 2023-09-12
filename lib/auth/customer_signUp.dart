@@ -1,10 +1,12 @@
 // ignore: file_names
 import 'dart:io';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecom/widgets/Auth_widget.dart';
 import 'package:ecom/widgets/snackbar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 // final TextEditingController _nameController = TextEditingController();
 // final TextEditingController _emailController = TextEditingController();
@@ -19,12 +21,18 @@ class CustomerRegister extends StatefulWidget {
 
 class _CustomerRegisterState extends State<CustomerRegister> {
   late String name;
+  late String profileImage;
   late String email;
   late String password;
+  late String _uid;
+  bool processing = false;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldMessengerState> _scaffoldKey =
       GlobalKey<ScaffoldMessengerState>();
   bool passwordVisibilty = false;
+
+  CollectionReference customers =
+      FirebaseFirestore.instance.collection('customers');
 
   final ImagePicker _picker = ImagePicker();
 
@@ -66,6 +74,101 @@ class _CustomerRegisterState extends State<CustomerRegister> {
         _pickedImageError = e;
       });
       print(_pickedImageError);
+    }
+  }
+
+  void signUp() async {
+    setState(() {
+      processing = true;
+    });
+
+    if (_formKey.currentState!.validate()) {
+      if (_imageFile != null) {
+        try {
+          await FirebaseAuth.instance
+              .createUserWithEmailAndPassword(email: email, password: password);
+
+          firebase_storage.Reference ref = firebase_storage
+              .FirebaseStorage.instance
+              .ref('cust-images/$email.jpg');
+
+          await ref.putFile(File(_imageFile!.path));
+
+          profileImage = await ref.getDownloadURL();
+          _uid = FirebaseAuth.instance.currentUser!.uid;
+          await customers.doc(_uid).set({
+            'name': name,
+            'email': email,
+            'profileImage': profileImage,
+            'phone': '',
+            'address': '',
+            'cid': _uid,
+          });
+
+          _formKey.currentState!.reset();
+          setState(() {
+            _imageFile = null;
+          });
+
+          Navigator.pushReplacementNamed(context, '/customer_home');
+
+          myMessageHnadler.showSnackBar(
+            _scaffoldKey,
+            'Your id created 😊😊',
+          );
+        } on FirebaseAuthException catch (e) {
+          if (e.code == 'weak-password') {
+            setState(() {
+              processing = false;
+            });
+            myMessageHnadler.showSnackBar(
+              _scaffoldKey,
+              'The password provided is too weak',
+            );
+            //  print('The password provided is too weak.');
+          } else if (e.code == 'email-already-in-use') {
+            setState(() {
+              processing = false;
+            });
+            myMessageHnadler.showSnackBar(
+              _scaffoldKey,
+              'The account already exists for that email.',
+            );
+            // print('The account already exists for that email.');
+          }
+        } catch (e) {
+          print(e);
+        }
+      } else {
+        setState(() {
+          processing = false;
+        });
+        myMessageHnadler.showSnackBar(
+          _scaffoldKey,
+          'Please pick an image',
+        );
+      }
+    } else {
+      setState(() {
+        processing = false;
+      });
+      myMessageHnadler.showSnackBar(
+        _scaffoldKey,
+        'Please enter valid details',
+      );
+
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   const SnackBar(
+      //     duration: Duration(seconds: 2),
+      //     backgroundColor: Colors.yellow,
+      //     content: Text(
+      //       'Please enter valid details',
+      //       textAlign: TextAlign.center,
+      //       style: TextStyle(
+      //           fontSize: 18, color: Colors.black),
+      //     ),
+      //   ),
+      // );
     }
   }
 
@@ -258,47 +361,18 @@ class _CustomerRegisterState extends State<CustomerRegister> {
                       HaveAccount(
                           actionLabel: 'Log In',
                           haveAccount: 'Already have an account?',
-                          onPressed: () {}),
-                      AuthMainButton(
-                        mainButtonLabel: 'Sign Up',
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            if (_imageFile != null) {
-                              _formKey.currentState!.reset();
-                              setState(() {
-                                _imageFile = null;
-                              });
-                              myMessageHnadler.showSnackBar(
-                                _scaffoldKey,
-                                'Your id created 😊😊',
-                              );
-                            } else {
-                              myMessageHnadler.showSnackBar(
-                                _scaffoldKey,
-                                'Please pick an image',
-                              );
-                            }
-                          } else {
-                            myMessageHnadler.showSnackBar(
-                              _scaffoldKey,
-                              'Please enter valid details',
-                            );
-
-                            // ScaffoldMessenger.of(context).showSnackBar(
-                            //   const SnackBar(
-                            //     duration: Duration(seconds: 2),
-                            //     backgroundColor: Colors.yellow,
-                            //     content: Text(
-                            //       'Please enter valid details',
-                            //       textAlign: TextAlign.center,
-                            //       style: TextStyle(
-                            //           fontSize: 18, color: Colors.black),
-                            //     ),
-                            //   ),
-                            // );
-                          }
-                        },
-                      )
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, '/customer_login');
+                          }),
+                      processing == true
+                          ? const CircularProgressIndicator()
+                          : AuthMainButton(
+                              mainButtonLabel: 'Sign Up',
+                              onPressed: () {
+                                signUp();
+                              },
+                            )
                     ],
                   ),
                 ),
