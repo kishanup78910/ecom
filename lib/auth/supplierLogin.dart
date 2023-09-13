@@ -8,14 +8,16 @@ import 'package:flutter/material.dart';
 // final TextEditingController _emailController = TextEditingController();
 // final TextEditingController _passwordController = TextEditingController();
 
-class CustomerLogin extends StatefulWidget {
-  const CustomerLogin({super.key});
+class SupplierLogin extends StatefulWidget {
+  const SupplierLogin({super.key});
 
   @override
-  State<CustomerLogin> createState() => _CustomerLoginState();
+  State<SupplierLogin> createState() => _SupplierLoginState();
 }
 
-class _CustomerLoginState extends State<CustomerLogin> {
+class _SupplierLoginState extends State<SupplierLogin> {
+  late String name;
+  late String profileImage;
   late String email;
   late String password;
   bool processing = false;
@@ -24,7 +26,6 @@ class _CustomerLoginState extends State<CustomerLogin> {
       GlobalKey<ScaffoldMessengerState>();
   bool passwordVisibilty = false;
 
-  // ignore: non_constant_identifier_names
   void LogIn() async {
     setState(() {
       processing = true;
@@ -37,7 +38,7 @@ class _CustomerLoginState extends State<CustomerLogin> {
 
         _formKey.currentState!.reset();
 
-        Navigator.pushReplacementNamed(context, '/customer_home');
+        Navigator.pushReplacementNamed(context, '/supplier_home');
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
           setState(() {

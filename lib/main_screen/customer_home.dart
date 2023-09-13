@@ -3,6 +3,7 @@ import 'package:ecom/main_screen/Stores.dart';
 import 'package:ecom/main_screen/category.dart';
 import 'package:ecom/main_screen/home.dart';
 import 'package:ecom/main_screen/profileScreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class CustomerHomeScreen extends StatefulWidget {
@@ -19,7 +20,9 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
     const CategoryScreen(),
     const StoresScreen(),
     const CartScreen(),
-    const ProfileScreen()
+    ProfileScreen(
+      documentId: FirebaseAuth.instance.currentUser!.uid,
+    )
   ];
   @override
   Widget build(BuildContext context) {
