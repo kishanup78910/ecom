@@ -20,7 +20,9 @@ class SupplierSignup extends StatefulWidget {
 }
 
 class _SupplierSignupState extends State<SupplierSignup> {
+  // ignore: non_constant_identifier_names
   late String StoreName;
+  // ignore: non_constant_identifier_names
   late String StoreLogo;
   late String email;
   late String password;
@@ -37,7 +39,6 @@ class _SupplierSignupState extends State<SupplierSignup> {
   final ImagePicker _picker = ImagePicker();
 
   XFile? _imageFile;
-  dynamic _pickedImageError;
 
   void _pickImageFromCamera() async {
     try {
@@ -51,10 +52,7 @@ class _SupplierSignupState extends State<SupplierSignup> {
         _imageFile = pickedImage;
       });
     } catch (e) {
-      setState(() {
-        _pickedImageError = e;
-      });
-      print(_pickedImageError);
+      setState(() {});
     }
   }
 
@@ -70,10 +68,7 @@ class _SupplierSignupState extends State<SupplierSignup> {
         _imageFile = pickedImage;
       });
     } catch (e) {
-      setState(() {
-        _pickedImageError = e;
-      });
-      print(_pickedImageError);
+      setState(() {});
     }
   }
 
@@ -111,6 +106,7 @@ class _SupplierSignupState extends State<SupplierSignup> {
             _imageFile = null;
           });
 
+          // ignore: use_build_context_synchronously
           Navigator.pushReplacementNamed(context, '/supplier_home');
 
           myMessageHnadler.showSnackBar(

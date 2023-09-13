@@ -1,4 +1,5 @@
 // ignore: file_names
+// ignore: file_names
 import 'package:ecom/widgets/Auth_widget.dart';
 import 'package:ecom/widgets/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';

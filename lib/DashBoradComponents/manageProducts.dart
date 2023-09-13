@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:ecom/widgets/AppBarWidgets.dart';
 import 'package:flutter/material.dart';
 
