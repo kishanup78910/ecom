@@ -177,7 +177,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                                     onPressed: () {
                                       Navigator.pushReplacementNamed(
                                         context,
-                                        '/supplier_home',
+                                        '/supplier_login',
                                       );
                                     },
                                     width: 0.25),
@@ -185,7 +185,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                                   padding: const EdgeInsets.only(right: 8.0),
                                   child: YellowButton(
                                       label: 'Sign Up',
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.pushReplacementNamed(
+                                          context,
+                                          '/supplier_signup',
+                                        );
+                                      },
                                       width: 0.25),
                                 ),
                               ],
@@ -197,6 +202,32 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                   ],
                 ),
               ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.white38,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(50),
+                        bottomRight: Radius.circular(50),
+                      ),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(12.0),
+                      child: Text(
+                        'Customer only',
+                        style: TextStyle(
+                            color: Colors.yellowAccent,
+                            fontSize: 26,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -222,7 +253,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                                 onPressed: () {
                                   Navigator.pushReplacementNamed(
                                     context,
-                                    '/customer_home',
+                                    '/customer_login',
                                   );
                                 },
                                 width: 0.25),
