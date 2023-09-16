@@ -2,6 +2,7 @@ import 'package:ecom/main_screen/Dashboard.dart';
 import 'package:ecom/main_screen/Stores.dart';
 import 'package:ecom/main_screen/category.dart';
 import 'package:ecom/main_screen/home.dart';
+import 'package:ecom/main_screen/upload_products.dart';
 import 'package:flutter/material.dart';
 
 class SupplierHomeScreen extends StatefulWidget {
@@ -18,9 +19,7 @@ class _SupplierHomeScreenState extends State<SupplierHomeScreen> {
     const CategoryScreen(),
     const StoresScreen(),
     const DashBoardScreen(),
-    const Center(
-      child: Text("Upload"),
-    ),
+    const UploadProducts()
   ];
   @override
   Widget build(BuildContext context) {
