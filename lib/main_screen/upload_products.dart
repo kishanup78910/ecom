@@ -28,6 +28,116 @@ List<String> categMen = [
   'other',
 ];
 
+List<String> categWomen = [
+  'dress',
+  '2pcs sets',
+  't-shirt',
+  'top',
+  'skirt',
+  'jeans',
+  'pants',
+  'coat',
+  'jacket',
+  'other'
+];
+
+List<String> categElectronics = [
+  'phone',
+  'computer',
+  'laptop',
+  'smart tv',
+  'phone holder',
+  'charger',
+  'usb cables',
+  'head phone',
+  'smart watch',
+  'tablet',
+  'mouse',
+  'keyboard',
+  'gaming',
+  'other'
+];
+
+List<String> cateAccessories = [
+  'hat',
+  'men sunglass',
+  'w sunglass',
+  'classic watch',
+  'gloves',
+  'belt waist',
+  'ring',
+  'necklace',
+  'scarf set',
+  'anklet',
+  'other'
+];
+
+List<String> categShoes = [
+  'men slippers',
+  'men classic',
+  'men casual',
+  'men boots',
+  'men canvas',
+  'men sport',
+  'men snadals',
+  'home slippers',
+  'women slippers',
+  'women boots',
+  'women heels',
+  'women sport',
+  'women snadals',
+  'other'
+];
+
+List<String> categHomeandgarden = [
+  'living room',
+  'bed room',
+  'dinning room',
+  'kitchen tools',
+  'bath access.',
+  'furniture',
+  'decoration',
+  'lighting',
+  'garden',
+  'other'
+];
+
+List<String> categBeauty = [
+  'body care',
+  'hair care',
+  'men perfume',
+  'women perfume',
+  'make up',
+  'other'
+];
+
+List<String> categKids = [
+  'girls sets',
+  'girls dress',
+  'girls top',
+  'girls pants',
+  'jacket',
+  'sweatshirts',
+  'boys sets',
+  'boys top',
+  'boys pants',
+  'home wear',
+  'boys suits',
+  'baby shoes',
+  'other'
+];
+
+List<String> cateBags = [
+  'wallet',
+  'clutch',
+  'chest bag',
+  'back pack',
+  'business bags',
+  'laptop bags',
+  'women bags',
+  'other'
+];
+
 class UploadProducts extends StatefulWidget {
   const UploadProducts({super.key});
 
@@ -47,6 +157,7 @@ class _UploadProductsState extends State<UploadProducts> {
 
   String mainCategValue = 'men';
   String subCategValue = 'shirt';
+  List<String> subCateList = [];
 
   final ImagePicker _picker = ImagePicker();
 
@@ -157,6 +268,53 @@ class _UploadProductsState extends State<UploadProducts> {
                                     value: value, child: Text(value));
                               }).toList(),
                               onChanged: (String? value) {
+                                if (value == 'men') {
+                                  setState(() {
+                                    subCategValue = 'shirt';
+                                  });
+                                  subCateList = categMen;
+                                } else if (value == 'women') {
+                                  setState(() {
+                                    subCategValue = 'dress';
+                                  });
+                                  subCateList = categWomen;
+                                } else if (value == 'electronics') {
+                                  setState(() {
+                                    subCategValue = 'phone';
+                                  });
+                                  subCateList = categElectronics;
+                                } else if (value == 'accessories') {
+                                  setState(() {
+                                    subCategValue = 'hat';
+                                  });
+                                  subCateList = cateAccessories;
+                                } else if (value == 'shoes') {
+                                  setState(() {
+                                    subCategValue = 'shoes';
+                                  });
+                                  subCateList = categShoes;
+                                } else if (value == 'home & garden') {
+                                  setState(() {
+                                    subCategValue = 'living room';
+                                  });
+                                  subCateList = categHomeandgarden;
+                                } else if (value == 'beauty') {
+                                  setState(() {
+                                    subCategValue = 'body care';
+                                  });
+                                  subCateList = categBeauty;
+                                } else if (value == 'kids') {
+                                  setState(() {
+                                    subCategValue = 'kids';
+                                  });
+                                  subCateList = categKids;
+                                } else if (value == 'bags') {
+                                  setState(() {
+                                    subCategValue = 'wallet';
+                                  });
+                                  subCateList = cateBags;
+                                }
+
                                 setState(() {
                                   mainCategValue = value!;
                                 });
@@ -164,7 +322,7 @@ class _UploadProductsState extends State<UploadProducts> {
                           const Text("select sub category"),
                           DropdownButton(
                               value: subCategValue,
-                              items: categMen
+                              items: subCateList
 
                                   // maincateg
                                   //['men', 'women', 'bags']
