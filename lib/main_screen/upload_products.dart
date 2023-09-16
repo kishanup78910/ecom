@@ -4,6 +4,30 @@ import 'package:ecom/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+List<String> categ = [
+  'men',
+  'women',
+  'electronics',
+  'accessories',
+  'shoes',
+  'home & garden',
+  'beauty',
+  'kids',
+  'bags'
+];
+
+List<String> categMen = [
+  'shirt',
+  't-shirt',
+  'jacket',
+  'vest',
+  'coat',
+  'jeans',
+  'shorts',
+  'suit',
+  'other',
+];
+
 class UploadProducts extends StatefulWidget {
   const UploadProducts({super.key});
 
@@ -21,18 +45,8 @@ class _UploadProductsState extends State<UploadProducts> {
   late String productName;
   late String productDescription;
 
-  void uploadProduct() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      print(price);
-      print(quantity);
-      print(productName);
-      print(productDescription);
-      print("validated");
-    } else {
-      myMessageHnadler.showSnackBar(_scaffoldKey, 'Please fill all details');
-    }
-  }
+  String mainCategValue = 'men';
+  String subCategValue = 'shirt';
 
   final ImagePicker _picker = ImagePicker();
 
@@ -52,18 +66,40 @@ class _UploadProductsState extends State<UploadProducts> {
   }
 
   Widget previewImages() {
-    return InkWell(
-      onLongPress: () {
-        setState(() {
-          imageFileList = [];
-        });
-      },
-      child: ListView.builder(
+    if (imageFileList!.isNotEmpty) {
+      return ListView.builder(
           itemCount: imageFileList!.length,
           itemBuilder: (context, index) {
             return Image.file(File(imageFileList![index].path));
-          }),
-    );
+          });
+    } else {
+      return const Center(
+        child: Text(
+          'You have not \n \npicked image yet !',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 16),
+        ),
+      );
+    }
+  }
+
+  void uploadProduct() {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+
+      if (imageFileList!.isNotEmpty) {
+        // upload product
+        setState(() {
+          imageFileList = [];
+        });
+        _formKey.currentState!.reset();
+      } else {
+        myMessageHnadler.showSnackBar(
+            _scaffoldKey, 'Please pick product images');
+      }
+    } else {
+      myMessageHnadler.showSnackBar(_scaffoldKey, 'Please fill all details');
+    }
   }
 
   @override
@@ -82,19 +118,66 @@ class _UploadProductsState extends State<UploadProducts> {
                 children: [
                   Row(
                     children: [
-                      Container(
-                        color: Colors.blueGrey.shade100,
-                        height: MediaQuery.of(context).size.width * 0.5,
-                        width: MediaQuery.of(context).size.width * 0.5,
-                        child: Center(
-                          child: imageFileList != null
-                              ? previewImages()
-                              : const Text(
-                                  'You have not \n \npicked image yet !',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 16),
-                                ),
+                      Stack(children: [
+                        Container(
+                          color: Colors.blueGrey.shade100,
+                          height: MediaQuery.of(context).size.width * 0.5,
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          child: Center(
+                            child: imageFileList != null
+                                ? previewImages()
+                                : const Text(
+                                    'You have not \n \npicked image yet !',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                          ),
                         ),
+                        imageFileList!.isEmpty
+                            ? const SizedBox()
+                            : IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    imageFileList = [];
+                                  });
+                                },
+                                icon: const Icon(Icons.delete_forever)),
+                      ]),
+                      Column(
+                        children: [
+                          const Text("select main category"),
+                          DropdownButton(
+                              value: mainCategValue,
+                              items: categ
+
+                                  // maincateg
+                                  //['men', 'women', 'bags']
+                                  .map<DropdownMenuItem<String>>((value) {
+                                return DropdownMenuItem(
+                                    value: value, child: Text(value));
+                              }).toList(),
+                              onChanged: (String? value) {
+                                setState(() {
+                                  mainCategValue = value!;
+                                });
+                              }),
+                          const Text("select sub category"),
+                          DropdownButton(
+                              value: subCategValue,
+                              items: categMen
+
+                                  // maincateg
+                                  //['men', 'women', 'bags']
+                                  .map<DropdownMenuItem<String>>((value) {
+                                return DropdownMenuItem(
+                                    value: value, child: Text(value));
+                              }).toList(),
+                              onChanged: (String? value) {
+                                setState(() {
+                                  subCategValue = value!;
+                                });
+                              }),
+                        ],
                       ),
                     ],
                   ),
@@ -209,6 +292,23 @@ class _UploadProductsState extends State<UploadProducts> {
         floatingActionButton: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            imageFileList!.isEmpty
+                ? const SizedBox()
+                : Padding(
+                    padding: const EdgeInsets.only(right: 10.0),
+                    child: FloatingActionButton(
+                      onPressed: () {
+                        setState(() {
+                          imageFileList = [];
+                        });
+                      },
+                      backgroundColor: Colors.yellow,
+                      child: const Icon(
+                        Icons.delete_forever,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
             Padding(
               padding: const EdgeInsets.only(right: 10.0),
               child: FloatingActionButton(
