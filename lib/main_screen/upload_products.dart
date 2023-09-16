@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 List<String> categ = [
+  'select category',
   'men',
   'women',
   'electronics',
@@ -17,6 +18,7 @@ List<String> categ = [
 ];
 
 List<String> categMen = [
+  'subcategory',
   'shirt',
   't-shirt',
   'jacket',
@@ -29,6 +31,7 @@ List<String> categMen = [
 ];
 
 List<String> categWomen = [
+  'subcategory',
   'dress',
   '2pcs sets',
   't-shirt',
@@ -42,6 +45,7 @@ List<String> categWomen = [
 ];
 
 List<String> categElectronics = [
+  'subcategory',
   'phone',
   'computer',
   'laptop',
@@ -59,6 +63,7 @@ List<String> categElectronics = [
 ];
 
 List<String> cateAccessories = [
+  'subcategory',
   'hat',
   'men sunglass',
   'w sunglass',
@@ -73,6 +78,7 @@ List<String> cateAccessories = [
 ];
 
 List<String> categShoes = [
+  'subcategory',
   'men slippers',
   'men classic',
   'men casual',
@@ -90,6 +96,7 @@ List<String> categShoes = [
 ];
 
 List<String> categHomeandgarden = [
+  'subcategory',
   'living room',
   'bed room',
   'dinning room',
@@ -103,6 +110,7 @@ List<String> categHomeandgarden = [
 ];
 
 List<String> categBeauty = [
+  'subcategory',
   'body care',
   'hair care',
   'men perfume',
@@ -112,6 +120,7 @@ List<String> categBeauty = [
 ];
 
 List<String> categKids = [
+  'subcategory',
   'girls sets',
   'girls dress',
   'girls top',
@@ -128,6 +137,7 @@ List<String> categKids = [
 ];
 
 List<String> cateBags = [
+  'subcategory',
   'wallet',
   'clutch',
   'chest bag',
@@ -155,8 +165,8 @@ class _UploadProductsState extends State<UploadProducts> {
   late String productName;
   late String productDescription;
 
-  String mainCategValue = 'men';
-  String subCategValue = 'shirt';
+  String mainCategValue = 'select category';
+  String subCategValue = 'subcategory';
   List<String> subCateList = [];
 
   final ImagePicker _picker = ImagePicker();
@@ -269,54 +279,28 @@ class _UploadProductsState extends State<UploadProducts> {
                               }).toList(),
                               onChanged: (String? value) {
                                 if (value == 'men') {
-                                  setState(() {
-                                    subCategValue = 'shirt';
-                                  });
                                   subCateList = categMen;
                                 } else if (value == 'women') {
-                                  setState(() {
-                                    subCategValue = 'dress';
-                                  });
                                   subCateList = categWomen;
                                 } else if (value == 'electronics') {
-                                  setState(() {
-                                    subCategValue = 'phone';
-                                  });
                                   subCateList = categElectronics;
                                 } else if (value == 'accessories') {
-                                  setState(() {
-                                    subCategValue = 'hat';
-                                  });
                                   subCateList = cateAccessories;
                                 } else if (value == 'shoes') {
-                                  setState(() {
-                                    subCategValue = 'shoes';
-                                  });
                                   subCateList = categShoes;
                                 } else if (value == 'home & garden') {
-                                  setState(() {
-                                    subCategValue = 'living room';
-                                  });
                                   subCateList = categHomeandgarden;
                                 } else if (value == 'beauty') {
-                                  setState(() {
-                                    subCategValue = 'body care';
-                                  });
                                   subCateList = categBeauty;
                                 } else if (value == 'kids') {
-                                  setState(() {
-                                    subCategValue = 'kids';
-                                  });
                                   subCateList = categKids;
                                 } else if (value == 'bags') {
-                                  setState(() {
-                                    subCategValue = 'wallet';
-                                  });
                                   subCateList = cateBags;
                                 }
 
                                 setState(() {
                                   mainCategValue = value!;
+                                  subCategValue = 'subcategory';
                                 });
                               }),
                           const Text("select sub category"),
