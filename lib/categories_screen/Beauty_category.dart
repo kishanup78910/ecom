@@ -55,14 +55,14 @@ class beautyCategory extends StatelessWidget {
                   mainAxisSpacing: 70,
                   crossAxisSpacing: 15,
                   crossAxisCount: 3,
-                  children: List.generate(beautysCat.length, (index) {
+                  children: List.generate(beautysCat.length - 1, (index) {
                     return GestureDetector(
                       onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => SubCategory(
-                                      subCatName: beautyLabel[index],
+                                      subCatName: beautyLabel[index + 1],
                                       mainCateName: 'Beauty',
                                     )));
                       },
@@ -70,13 +70,13 @@ class beautyCategory extends StatelessWidget {
                         children: [
                           SizedBox(
                             child: Image(
-                              image: AssetImage(beautysCat[index]),
+                              image: AssetImage(beautysCat[index + 1]),
                             ),
                             height: 70,
                             width: 70,
                           ),
                           Text(
-                            beautyLabel[index],
+                            beautyLabel[index + 1],
                             style: const TextStyle(fontSize: 12),
                           )
                         ],
