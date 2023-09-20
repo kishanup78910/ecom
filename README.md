@@ -62,4 +62,4 @@ Product details page UI complete in this i use swipper package
 
 
 
-![product details U](https://github.com/kishanup78910/ecom/assets/79304976/532a1cc8-52a2-4ed9-bec6-3e220215f412)
+![prdetail](https://github.com/kishanup78910/ecom/assets/79304976/3961f414-63dd-48f9-8bc0-3cb3fa2d8729)
