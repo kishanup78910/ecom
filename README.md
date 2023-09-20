@@ -63,3 +63,6 @@ Product details page UI complete in this i use swipper package
 
 
 ![prdetail](https://github.com/kishanup78910/ecom/assets/79304976/3961f414-63dd-48f9-8bc0-3cb3fa2d8729)
+
+
+interaactive viewer is used in full size screen to view the product and zoom when we click on it .
