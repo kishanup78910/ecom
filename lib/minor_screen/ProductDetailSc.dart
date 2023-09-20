@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecom/Models/productsModel.dart';
+import 'package:ecom/minor_screen/fullScreen.dart';
 import 'package:ecom/widgets/YelloButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
@@ -37,19 +38,60 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             padding: const EdgeInsets.all(8.0),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.45,
-                child: Swiper(
-                  pagination: const SwiperPagination(
-                      builder: SwiperPagination.fraction),
-                  itemBuilder: (context, index) {
-                    return Image(
-                      image: NetworkImage(
-                        imagesList[index],
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          FullScreenView(imagesList: imagesList),
+                    ),
+                  );
+                },
+                child: Stack(
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.45,
+                      child: Swiper(
+                        pagination: const SwiperPagination(
+                            builder: SwiperPagination.fraction),
+                        itemBuilder: (context, index) {
+                          return Image(
+                            image: NetworkImage(
+                              imagesList[index],
+                            ),
+                          );
+                        },
+                        itemCount: imagesList.length,
                       ),
-                    );
-                  },
-                  itemCount: imagesList.length,
+                    ),
+                    Positioned(
+                      left: 15,
+                      top: 25,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.yellow,
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: const Icon(Icons.arrow_back_ios_new),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      right: 15,
+                      top: 25,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.yellow,
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: const Icon(Icons.share),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Text(
