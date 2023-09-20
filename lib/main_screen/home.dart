@@ -1,3 +1,12 @@
+import 'package:ecom/Gallery/accesoriesGallery.dart';
+import 'package:ecom/Gallery/bagsGallery.dart';
+import 'package:ecom/Gallery/beautyGallery.dart';
+import 'package:ecom/Gallery/electronicsGallery.dart';
+import 'package:ecom/Gallery/homeAndGarden.dart';
+import 'package:ecom/Gallery/kidsGallery.dart';
+import 'package:ecom/Gallery/men_gallery.dart';
+import 'package:ecom/Gallery/shoesGallery.dart';
+import 'package:ecom/Gallery/womensGalley.dart';
 import 'package:ecom/minor_screen/search.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return DefaultTabController(
       length: 9,
       child: Scaffold(
+        backgroundColor: Colors.blueGrey.shade100.withOpacity(0.5),
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white,
@@ -36,33 +46,15 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: const TabBarView(
           children: [
-            Center(
-              child: Text('Men Screen'),
-            ),
-            Center(
-              child: Text('Women Screen'),
-            ),
-            Center(
-              child: Text('Shoes Screen'),
-            ),
-            Center(
-              child: Text('Bags Screen'),
-            ),
-            Center(
-              child: Text('Electronics Screen'),
-            ),
-            Center(
-              child: Text('Accessories Screen'),
-            ),
-            Center(
-              child: Text('Home & Garden'),
-            ),
-            Center(
-              child: Text('Kids'),
-            ),
-            Center(
-              child: Text('Beauty Screen'),
-            ),
+            MenGalleryScreen(),
+            WomenGalleryScreen(),
+            ShoesGalleryScreen(),
+            BagsGalleryScreen(),
+            ElectronicsGalleryScreen(),
+            AceesoriesGalleryScreen(),
+            HomeAndGaradenGalleryScreen(),
+            KidsGalleryScreen(),
+            BeautyGalleryScreen(),
           ],
         ),
       ),
