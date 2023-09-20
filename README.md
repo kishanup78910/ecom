@@ -43,3 +43,12 @@ Regular expression is a way to validate the email like things , it is good for f
 
 
 in this project i have added anonymous athetication  . 
+
+the homedesign screen after uploading product looks like this 
+
+
+![homescreen](https://github.com/kishanup78910/ecom/assets/79304976/572bacd4-a8e2-4b1b-99d3-4c7c784e13dc)
+
+
+
+and after clicking on each project i use a package swiper that do the pagination . and help the product to swipe  . 
