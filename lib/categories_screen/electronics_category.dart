@@ -69,14 +69,14 @@ class electronicsCategory extends StatelessWidget {
                   mainAxisSpacing: 70,
                   crossAxisSpacing: 15,
                   crossAxisCount: 3,
-                  children: List.generate(electronicssCat.length, (index) {
+                  children: List.generate(electronicssCat.length - 1, (index) {
                     return GestureDetector(
                       onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => SubCategory(
-                                      subCatName: electronicsLabel[index],
+                                      subCatName: electronicsLabel[index + 1],
                                       mainCateName: 'Electonics',
                                     )));
                       },
@@ -84,12 +84,12 @@ class electronicsCategory extends StatelessWidget {
                         children: [
                           SizedBox(
                             child: Image(
-                              image: AssetImage(electronicssCat[index]),
+                              image: AssetImage(electronicssCat[index + 1]),
                             ),
                             height: 70,
                             width: 70,
                           ),
-                          Text(electronicsLabel[index])
+                          Text(electronicsLabel[index + 1])
                         ],
                       ),
                     );
