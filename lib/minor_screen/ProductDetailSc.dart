@@ -37,20 +37,33 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             padding: const EdgeInsets.all(8.0),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.45,
-                child: Swiper(
-                  pagination: const SwiperPagination(
-                      builder: SwiperPagination.fraction),
-                  itemBuilder: (context, index) {
-                    return Image(
-                      image: NetworkImage(
-                        imagesList[index],
+              Stack(
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.45,
+                    child: Swiper(
+                      pagination: const SwiperPagination(
+                          builder: SwiperPagination.fraction),
+                      itemBuilder: (context, index) {
+                        return Image(
+                          image: NetworkImage(
+                            imagesList[index],
+                          ),
+                        );
+                      },
+                      itemCount: imagesList.length,
+                    ),
+                  ),
+                  Positioned(
+                    child: CircleAvatar(
+                      backgroundColor: Colors.yellow,
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.arrow_back_ios_new),
                       ),
-                    );
-                  },
-                  itemCount: imagesList.length,
-                ),
+                    ),
+                  ),
+                ],
               ),
               Text(
                 widget.proList['productname'],
