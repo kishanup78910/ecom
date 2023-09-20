@@ -52,3 +52,8 @@ the homedesign screen after uploading product looks like this
 
 
 and after clicking on each project i use a package swiper that do the pagination . and help the product to swipe  . 
+the package name is ::   --- >>>>>>>>>>>>>>>>>>>   flutter pub add staggered_grid_view_flutter
+
+
+
+
