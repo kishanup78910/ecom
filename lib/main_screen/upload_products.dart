@@ -1,11 +1,11 @@
 import 'dart:io';
-import 'package:uuid/data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecom/utilities/categ_list.dart';
 import 'package:ecom/widgets/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+// ignore: depend_on_referenced_packages
 import 'package:path/path.dart' as path;
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:uuid/uuid.dart';
