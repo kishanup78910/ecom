@@ -158,7 +158,8 @@ class _UploadProductsState extends State<UploadProducts> {
           processing = false;
           imageFileList = [];
           mainCategValue = 'select category';
-          subCategValue = 'subcategory';
+          subCateList = [];
+          imageUrls = [];
         });
         _formKey.currentState!.reset();
       });
