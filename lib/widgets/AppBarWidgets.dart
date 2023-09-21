@@ -22,6 +22,24 @@ class AppBarBackButton extends StatelessWidget {
   }
 }
 
+class YellowBackButton extends StatelessWidget {
+  const YellowBackButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        icon: const Icon(
+          Icons.arrow_back_ios,
+          color: Colors.yellow,
+        ));
+  }
+}
+
 class AppBarTitle extends StatelessWidget {
   const AppBarTitle({
     super.key,

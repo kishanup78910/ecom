@@ -5,7 +5,9 @@ import 'package:ecom/DashBoradComponents/manageProducts.dart';
 import 'package:ecom/DashBoradComponents/supplierStatistc.dart';
 import 'package:ecom/DashBoradComponents/supplier_balance.dart';
 import 'package:ecom/DashBoradComponents/supplier_order.dart';
+import 'package:ecom/minor_screen/visit_store.dart';
 import 'package:ecom/widgets/AppBarWidgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 List<String> label = [
@@ -18,7 +20,7 @@ List<String> label = [
 ];
 
 List<Widget> pages = [
-  const MyStore(),
+  visitStore(supplierId: FirebaseAuth.instance.currentUser!.uid),
   const SupplierOrder(),
   const EditBusiness(),
   const ManageProducts(),
