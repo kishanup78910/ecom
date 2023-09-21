@@ -15,6 +15,7 @@ class FullScreenView extends StatefulWidget {
 class _FullScreenViewState extends State<FullScreenView> {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -31,16 +32,7 @@ class _FullScreenViewState extends State<FullScreenView> {
         ),
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.5,
-          child: PageView(
-            children: List.generate(widget.imagesList.length, (index) {
-              return InteractiveViewer(
-                transformationController: TransformationController(),
-                child: Image.network(
-                  widget.imagesList[index],
-                ),
-              );
-            }),
-          ),
+          child: PageView(children: images()),
         ),
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.2,
@@ -55,25 +47,39 @@ class _FullScreenViewState extends State<FullScreenView> {
       scrollDirection: Axis.horizontal,
       itemCount: widget.imagesList.length,
       itemBuilder: (context, index) {
-        return Container(
-          margin: const EdgeInsets.all(8),
-          width: 120,
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 4,
-              color: Colors.yellow,
+        return GestureDetector(
+          onTap: () {},
+          child: Container(
+            margin: const EdgeInsets.all(8),
+            width: 120,
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: 4,
+                color: Colors.yellow,
+              ),
+              borderRadius: BorderRadius.circular(15),
             ),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.network(
-              widget.imagesList[index],
-              fit: BoxFit.cover,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.network(
+                widget.imagesList[index],
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         );
       },
     );
+  }
+
+  List<Widget> images() {
+    return List.generate(widget.imagesList.length, (index) {
+      return InteractiveViewer(
+        transformationController: TransformationController(),
+        child: Image.network(
+          widget.imagesList[index],
+        ),
+      );
+    });
   }
 }
