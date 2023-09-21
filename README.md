@@ -72,3 +72,15 @@ Zoom screen is completed with zoom facilty through interactive viewer  you can a
 
 ![fullscreen](https://github.com/kishanup78910/ecom/assets/79304976/2f9a9a9e-a1a1-46c3-8c77-c931309c7c43)
 
+
+
+After that is am going to build the store screen which show differnnt store 
+
+and on clicking a particular store its all product open 
+
+
+
+![all store](https://github.com/kishanup78910/ecom/assets/79304976/53e86232-c4b2-4508-8be4-f721546a98f3)
+
+
+![storedtails](https://github.com/kishanup78910/ecom/assets/79304976/9ee28d83-16c3-45e7-9b0f-ae0cf3d94361)
