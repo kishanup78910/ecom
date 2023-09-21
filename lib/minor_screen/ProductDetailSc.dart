@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecom/Models/productsModel.dart';
+import 'package:ecom/main_screen/CartScreen.dart';
 import 'package:ecom/minor_screen/fullScreen.dart';
+import 'package:ecom/minor_screen/visit_store.dart';
+import 'package:ecom/widgets/AppBarWidgets.dart';
 import 'package:ecom/widgets/YelloButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
@@ -222,13 +225,27 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               Row(
                 children: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => visitStore(
+                                    supplierId: widget.proList['sid'],
+                                  )));
+                    },
                     icon: const Icon(
                       Icons.store,
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const CartScreen(
+                                    back: AppBarBackButton(),
+                                  )));
+                    },
                     icon: const Icon(
                       Icons.shopping_cart,
                     ),

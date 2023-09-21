@@ -13,6 +13,8 @@ class FullScreenView extends StatefulWidget {
 }
 
 class _FullScreenViewState extends State<FullScreenView> {
+  final PageController _controller = PageController();
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -23,16 +25,25 @@ class _FullScreenViewState extends State<FullScreenView> {
         backgroundColor: Colors.white,
         leading: const AppBarBackButton(),
       ),
-      body: Column(children: [
-        const Center(
+      body:
+          Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Center(
           child: Text(
-            '1/5',
-            style: TextStyle(fontSize: 24, letterSpacing: 8),
+            ('${index + 1}' + ('/') + '${widget.imagesList.length.toString()}'),
+            style: const TextStyle(fontSize: 24, letterSpacing: 8),
           ),
         ),
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.5,
-          child: PageView(children: images()),
+          child: PageView(
+            onPageChanged: (value) {
+              setState(() {
+                index = value;
+              });
+            },
+            controller: _controller,
+            children: images(),
+          ),
         ),
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.2,
@@ -48,7 +59,9 @@ class _FullScreenViewState extends State<FullScreenView> {
       itemCount: widget.imagesList.length,
       itemBuilder: (context, index) {
         return GestureDetector(
-          onTap: () {},
+          onTap: () {
+            _controller.jumpToPage(index);
+          },
           child: Container(
             margin: const EdgeInsets.all(8),
             width: 120,
