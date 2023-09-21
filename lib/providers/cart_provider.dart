@@ -24,4 +24,22 @@ class cart extends ChangeNotifier {
   List<Product> get getItems {
     return _list;
   }
+
+  int? get count{
+    _list.length;
+  }
+
+
+
+  void addItem(
+     String name,
+  double price,
+  int qty = 1,
+  int qntty,
+  List imagesUrl,
+  String documentId,
+  String suppId,
+  ){
+
+  }
 }
