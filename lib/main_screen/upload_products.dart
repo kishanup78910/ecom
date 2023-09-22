@@ -153,7 +153,7 @@ class _UploadProductsState extends State<UploadProducts> {
         'sid': FirebaseAuth.instance.currentUser!.uid,
         'productimages': imageUrls,
         'discount': 0,
-        'instock': 0
+        'instock': quantity
       }).whenComplete(() {
         setState(() {
           processing = false;
