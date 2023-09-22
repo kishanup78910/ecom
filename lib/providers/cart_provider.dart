@@ -33,6 +33,15 @@ class Cart extends ChangeNotifier {
     return _list;
   }
 
+  double get totalPrice {
+    var total = 0.0;
+
+    for (var item in _list) {
+      total += item.price * item.qty;
+    }
+    return total;
+  }
+
   int? get count {
     _list.length;
   }
@@ -66,6 +75,16 @@ class Cart extends ChangeNotifier {
 
   void decreament(Product product) {
     product.decrease();
+    notifyListeners();
+  }
+
+  void removeItem(Product product) {
+    _list.remove(product);
+    notifyListeners();
+  }
+
+  void clearCart() {
+    _list.clear();
     notifyListeners();
   }
 }
