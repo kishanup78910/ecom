@@ -3,11 +3,12 @@ import 'package:ecom/auth/customer_signUp.dart';
 import 'package:ecom/auth/supplierLogin.dart';
 import 'package:ecom/auth/supplier_signup.dart';
 import 'package:ecom/firebase_options.dart';
+import 'package:ecom/providers/cart_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:ecom/main_screen/WelcomeScreen.dart';
 import 'package:ecom/main_screen/customer_home.dart';
 import 'package:ecom/main_screen/supplier_home.dart';
-
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -15,7 +16,11 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (_) => Cart(),
+    )
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
