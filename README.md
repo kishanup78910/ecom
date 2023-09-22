@@ -89,3 +89,7 @@ and on clicking a particular store its all product open
 I have added a package for icon flutter_awesome icon  ---------------------------------------------------------(flutter pub add font_awesome_flutter)
 to add button for contacting supplier
 ![store2](https://github.com/kishanup78910/ecom/assets/79304976/d2b94d12-f277-4278-af23-493fd29197ff)
+
+
+
+for the state management i use provide  .
