@@ -3,12 +3,14 @@ import 'package:ecom/Models/productsModel.dart';
 import 'package:ecom/main_screen/CartScreen.dart';
 import 'package:ecom/minor_screen/fullScreen.dart';
 import 'package:ecom/minor_screen/visit_store.dart';
+import 'package:ecom/providers/cart_provider.dart';
 import 'package:ecom/widgets/AppBarWidgets.dart';
 import 'package:ecom/widgets/YelloButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final dynamic proList;
@@ -254,7 +256,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
               YellowButton(
                 label: 'ADD TO CART',
-                onPressed: () {},
+                onPressed: () {
+                  context.read<Cart>().addItem(
+                        widget.proList['productname'],
+                        widget.proList['price'],
+                        1,
+                        widget.proList['instock'],
+                        widget.proList['productimages'],
+                        widget.proList['productid'],
+                        widget.proList['sid'],
+                      );
+                },
                 width: 0.55,
               ),
             ],
