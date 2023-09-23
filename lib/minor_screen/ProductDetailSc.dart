@@ -4,6 +4,7 @@ import 'package:ecom/main_screen/CartScreen.dart';
 import 'package:ecom/minor_screen/fullScreen.dart';
 import 'package:ecom/minor_screen/visit_store.dart';
 import 'package:ecom/providers/cart_provider.dart';
+import 'package:ecom/providers/wish_provider.dart';
 import 'package:ecom/widgets/AppBarWidgets.dart';
 import 'package:ecom/widgets/YelloButton.dart';
 import 'package:ecom/widgets/snackbar.dart';
@@ -139,12 +140,42 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             ],
                           ),
                           IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.favorite_border_outlined,
-                              color: Colors.red,
-                            ),
-                          ),
+                              onPressed: () {
+                                context
+                                            .read<Wish>()
+                                            .getWishItems
+                                            .firstWhereOrNull((product) =>
+                                                product.documentId ==
+                                                widget.proList['productid']) !=
+                                        null
+                                    ? context
+                                        .read<Wish>()
+                                        .removeThis(widget.proList['productid'])
+                                    : context.read<Wish>().addWishItem(
+                                          widget.proList['productname'],
+                                          widget.proList['price'],
+                                          1,
+                                          widget.proList['instock'],
+                                          widget.proList['productimages'],
+                                          widget.proList['productid'],
+                                          widget.proList['sid'],
+                                        );
+                              },
+                              icon: context
+                                          .watch<Wish>()
+                                          .getWishItems
+                                          .firstWhereOrNull((product) =>
+                                              product.documentId ==
+                                              widget.proList['productid']) !=
+                                      null
+                                  ? const Icon(
+                                      Icons.favorite,
+                                      color: Colors.red,
+                                    )
+                                  : const Icon(
+                                      Icons.favorite_outline,
+                                      color: Colors.red,
+                                    )),
                         ],
                       ),
                       Text(
@@ -161,7 +192,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       Text(
                         widget.proList['productdescription'],
                         textScaleFactor: 1.2,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 20, fontWeight: FontWeight.w600),
                       ),
                       const productDetailsHeader(

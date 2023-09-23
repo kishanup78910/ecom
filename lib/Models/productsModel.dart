@@ -1,8 +1,11 @@
 import 'package:ecom/minor_screen/ProductDetailSc.dart';
+import 'package:ecom/providers/wish_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:collection/collection.dart';
 
-class productModel extends StatelessWidget {
+class productModel extends StatefulWidget {
   final dynamic products;
   const productModel({
     super.key,
@@ -10,12 +13,17 @@ class productModel extends StatelessWidget {
   });
 
   @override
+  State<productModel> createState() => _productModelState();
+}
+
+class _productModelState extends State<productModel> {
+  @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return ProductDetailsScreen(
-            proList: products,
+            proList: widget.products,
           );
         }));
       },
@@ -37,7 +45,7 @@ class productModel extends StatelessWidget {
                     maxHeight: 200,
                     maxWidth: 100,
                   ),
-                  child: Image.network(products['productimages'][0]),
+                  child: Image.network(widget.products['productimages'][0]),
                 ),
               ),
               Padding(
@@ -45,7 +53,7 @@ class productModel extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      products['productname'],
+                      widget.products['productname'],
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
@@ -57,13 +65,14 @@ class productModel extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(products['price'].toStringAsFixed(2) + ' \$',
+                        Text(
+                            widget.products['price'].toStringAsFixed(2) + ' \$',
                             style: const TextStyle(
                               color: Colors.red,
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             )),
-                        products['sid'] ==
+                        widget.products['sid'] ==
                                 FirebaseAuth.instance.currentUser!.uid
                             ? IconButton(
                                 onPressed: () {},
@@ -73,12 +82,42 @@ class productModel extends StatelessWidget {
                                 ),
                               )
                             : IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.favorite_border_outlined,
-                                  color: Colors.red,
-                                ),
-                              )
+                                onPressed: () {
+                                  context
+                                              .read<Wish>()
+                                              .getWishItems
+                                              .firstWhereOrNull((product) =>
+                                                  product.documentId ==
+                                                  widget
+                                                      .products['productid']) !=
+                                          null
+                                      ? context.read<Wish>().removeThis(
+                                          widget.products['productid'])
+                                      : context.read<Wish>().addWishItem(
+                                            widget.products['productname'],
+                                            widget.products['price'],
+                                            1,
+                                            widget.products['instock'],
+                                            widget.products['productimages'],
+                                            widget.products['productid'],
+                                            widget.products['sid'],
+                                          );
+                                },
+                                icon: context
+                                            .watch<Wish>()
+                                            .getWishItems
+                                            .firstWhereOrNull((product) =>
+                                                product.documentId ==
+                                                widget.products['productid']) !=
+                                        null
+                                    ? const Icon(
+                                        Icons.favorite,
+                                        color: Colors.red,
+                                      )
+                                    : const Icon(
+                                        Icons.favorite_outline,
+                                        color: Colors.red,
+                                      )),
                       ],
                     )
                   ],
