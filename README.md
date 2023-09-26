@@ -92,4 +92,4 @@ to add button for contacting supplier
 
 
 
-for the state management i use provide  .
+for the state management i use provide   . in this project i use badge [packgae to add badge and numbering to cart screen and cart icon . 
