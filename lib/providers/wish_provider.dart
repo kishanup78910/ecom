@@ -12,7 +12,7 @@ class Wish extends ChangeNotifier {
     return _list.length;
   }
 
-  void addWishItem(
+  Future<void> addWishItem(
     String name,
     double price,
     int qty,
@@ -20,7 +20,7 @@ class Wish extends ChangeNotifier {
     List imagesUrl,
     String documentId,
     String suppId,
-  ) {
+  ) async {
     final product = Product(
         name: name,
         price: price,

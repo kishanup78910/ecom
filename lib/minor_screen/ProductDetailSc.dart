@@ -27,20 +27,27 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  late final Stream<QuerySnapshot> _productStream = FirebaseFirestore.instance
+      .collection('products')
+      .where('maincategory', isEqualTo: widget.proList['maincategory'])
+      .where(
+        'subcategory',
+        isEqualTo: widget.proList['subcategory'],
+      )
+      .snapshots();
+
+  late var existingItemsWishlist = context
+      .read<Wish>()
+      .getWishItems
+      .firstWhereOrNull(
+          (product) => product.documentId == widget.proList['productid']);
+
   late List<dynamic> imagesList = widget.proList['productimages'];
   final GlobalKey<ScaffoldMessengerState> _scaffoldKey =
       GlobalKey<ScaffoldMessengerState>();
 
   @override
   Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> _productStream = FirebaseFirestore.instance
-        .collection('products')
-        .where('maincategory', isEqualTo: widget.proList['maincategory'])
-        .where(
-          'subcategory',
-          isEqualTo: widget.proList['subcategory'],
-        )
-        .snapshots();
     return Material(
       child: SafeArea(
         child: ScaffoldMessenger(
@@ -141,13 +148,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           ),
                           IconButton(
                               onPressed: () {
-                                context
-                                            .read<Wish>()
-                                            .getWishItems
-                                            .firstWhereOrNull((product) =>
-                                                product.documentId ==
-                                                widget.proList['productid']) !=
-                                        null
+                                existingItemsWishlist != null
                                     ? context
                                         .read<Wish>()
                                         .removeThis(widget.proList['productid'])

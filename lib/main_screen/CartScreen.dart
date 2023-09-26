@@ -2,14 +2,19 @@
 // ignore: file_names
 // ignore: file_names
 // ignore: file_names
+import 'package:ecom/Models/cartModel.dart';
 import 'package:ecom/main_screen/customer_home.dart';
 import 'package:ecom/providers/cart_provider.dart';
+import 'package:ecom/providers/product_class.dart';
+import 'package:ecom/providers/wish_provider.dart';
 import 'package:ecom/widgets/AppBarWidgets.dart';
 import 'package:ecom/widgets/YelloButton.dart';
 import 'package:ecom/widgets/alert_dialogue.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:collection/collection.dart';
 
 class CartScreen extends StatefulWidget {
   final Widget? back;
@@ -136,96 +141,9 @@ class CartItems extends StatelessWidget {
             itemCount: cart.getItems.length,
             itemBuilder: (context, index) {
               final product = cart.getItems[index];
-              return Card(
-                child: SizedBox(
-                  height: 100,
-                  child: Row(children: [
-                    SizedBox(
-                      height: 100,
-                      width: 120,
-                      child: Image.network(
-                        cart.getItems[index].imagesUrl.first,
-                      ),
-                    ),
-                    Flexible(
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              cart.getItems[index].name,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  cart.getItems[index].price.toString(),
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                                Container(
-                                  height: 35,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey.shade200,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  child: Row(children: [
-                                    product.qty == 1
-                                        ? IconButton(
-                                            onPressed: () {
-                                              cart.removeItem(product);
-                                            },
-                                            icon: const Icon(
-                                              Icons.delete_forever,
-                                              size: 18,
-                                            ),
-                                          )
-                                        : IconButton(
-                                            onPressed: () {
-                                              cart.decreament(product);
-                                            },
-                                            icon: const Icon(
-                                              FontAwesomeIcons.minus,
-                                              size: 18,
-                                            ),
-                                          ),
-                                    Text(
-                                      product.qty.toString(),
-                                      style: product.qty == product.qntty
-                                          ? const TextStyle(
-                                              fontSize: 20,
-                                              fontFamily: 'Acme',
-                                              color: Colors.red)
-                                          : const TextStyle(
-                                              fontSize: 20, fontFamily: 'Acme'),
-                                    ),
-                                    IconButton(
-                                      onPressed: product.qty == product.qntty
-                                          ? null
-                                          : () {
-                                              cart.increament(product);
-                                            },
-                                      icon: const Icon(
-                                        FontAwesomeIcons.plus,
-                                        size: 18,
-                                      ),
-                                    ),
-                                  ]),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  ]),
-                ),
+              return CartModel(
+                product: product,
+                cart: context.read<Cart>(),
               );
             });
       },

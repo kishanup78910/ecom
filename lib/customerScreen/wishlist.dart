@@ -2,11 +2,15 @@
 // ignore: file_names
 // ignore: file_names
 // ignore: file_names
+import 'package:ecom/Models/wishModel.dart';
 import 'package:ecom/main_screen/customer_home.dart';
 import 'package:ecom/providers/cart_provider.dart';
+import 'package:ecom/providers/product_class.dart';
 
 import 'package:ecom/providers/wish_provider.dart';
 import 'package:ecom/widgets/AppBarWidgets.dart';
+import 'package:ecom/widgets/alert_dialogue.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
@@ -53,6 +57,27 @@ class _WishListScreenState extends State<WishListScreen> {
         //         icon: const Icon(Icons.delete_forever, color: Colors.black),
         //       ),
         // ],
+
+        actions: [
+          context.watch<Wish>().getWishItems.isEmpty
+              ? const SizedBox()
+              : IconButton(
+                  onPressed: () {
+                    MyAlertDialogue().showMyDialogue(
+                        context: context,
+                        title: 'Clear WishList',
+                        content: 'Are you sure you want to clear Wishlist?',
+                        tabNo: () {
+                          Navigator.pop(context);
+                        },
+                        tabYes: () {
+                          context.read<Wish>().clearWishList();
+                          Navigator.pop(context);
+                        });
+                  },
+                  icon: const Icon(Icons.delete_forever, color: Colors.black),
+                ),
+        ],
       ),
       body: context.watch<Wish>().getWishItems.isNotEmpty
           ? const WishItems()
@@ -117,92 +142,7 @@ class WishItems extends StatelessWidget {
             itemCount: wish.getWishItems.length,
             itemBuilder: (context, index) {
               final product = wish.getWishItems[index];
-              return Card(
-                child: SizedBox(
-                  height: 100,
-                  child: Row(children: [
-                    SizedBox(
-                      height: 100,
-                      width: 120,
-                      child: Image.network(
-                        product.imagesUrl[0],
-                      ),
-                    ),
-                    Flexible(
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              product.name,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  wish.getWishItems[index].price.toString(),
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                                Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {
-                                        context
-                                            .read<Wish>()
-                                            .removeItem(product);
-                                      },
-                                      icon: const Icon(
-                                        Icons.delete_forever,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    IconButton(
-                                      onPressed: () {
-                                        context
-                                                    .read<Cart>()
-                                                    .getItems
-                                                    .firstWhereOrNull(
-                                                        (element) =>
-                                                            element
-                                                                .documentId ==
-                                                            product
-                                                                .documentId) !=
-                                                null
-                                            ? print('already in cart')
-                                            : context.read<Cart>().addItem(
-                                                  product.name,
-                                                  product.price,
-                                                  1,
-                                                  product.qntty,
-                                                  product.imagesUrl,
-                                                  product.documentId,
-                                                  product.suppId,
-                                                );
-                                      },
-                                      icon: const Icon(
-                                        Icons.shopping_cart_checkout_outlined,
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    )
-                  ]),
-                ),
-              );
+              return wishListModel(product: product);
             });
       },
     );
