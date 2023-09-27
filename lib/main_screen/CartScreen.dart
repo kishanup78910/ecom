@@ -5,16 +5,12 @@
 import 'package:ecom/Models/cartModel.dart';
 import 'package:ecom/main_screen/customer_home.dart';
 import 'package:ecom/providers/cart_provider.dart';
-import 'package:ecom/providers/product_class.dart';
-import 'package:ecom/providers/wish_provider.dart';
 import 'package:ecom/widgets/AppBarWidgets.dart';
 import 'package:ecom/widgets/YelloButton.dart';
 import 'package:ecom/widgets/alert_dialogue.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:collection/collection.dart';
 
 class CartScreen extends StatefulWidget {
   final Widget? back;
