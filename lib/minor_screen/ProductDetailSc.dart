@@ -4,10 +4,14 @@ import 'package:ecom/main_screen/CartScreen.dart';
 import 'package:ecom/minor_screen/fullScreen.dart';
 import 'package:ecom/minor_screen/visit_store.dart';
 import 'package:ecom/providers/cart_provider.dart';
+import 'package:ecom/providers/wish_provider.dart';
 import 'package:ecom/widgets/AppBarWidgets.dart';
 import 'package:ecom/widgets/YelloButton.dart';
 import 'package:ecom/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
+import 'package:badges/badges.dart' as badges;
+import 'package:badges/badges.dart';
+
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
@@ -26,20 +30,29 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  late final Stream<QuerySnapshot> _productStream = FirebaseFirestore.instance
+      .collection('products')
+      .where('maincategory', isEqualTo: widget.proList['maincategory'])
+      .where(
+        'subcategory',
+        isEqualTo: widget.proList['subcategory'],
+      )
+      .snapshots();
+
+  late var existingItemsWishlist = context
+      .read<Wish>()
+      .getWishItems
+      .firstWhereOrNull(
+          (product) => product.documentId == widget.proList['productid']);
+
   late List<dynamic> imagesList = widget.proList['productimages'];
   final GlobalKey<ScaffoldMessengerState> _scaffoldKey =
       GlobalKey<ScaffoldMessengerState>();
 
   @override
   Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> _productStream = FirebaseFirestore.instance
-        .collection('products')
-        .where('maincategory', isEqualTo: widget.proList['maincategory'])
-        .where(
-          'subcategory',
-          isEqualTo: widget.proList['subcategory'],
-        )
-        .snapshots();
+    var existInCart = context.read<Cart>().getItems.firstWhereOrNull(
+        (product) => product.documentId == widget.proList['productid']);
     return Material(
       child: SafeArea(
         child: ScaffoldMessenger(
@@ -139,12 +152,36 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             ],
                           ),
                           IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.favorite_border_outlined,
-                              color: Colors.red,
-                            ),
-                          ),
+                              onPressed: () {
+                                existingItemsWishlist != null
+                                    ? context
+                                        .read<Wish>()
+                                        .removeThis(widget.proList['productid'])
+                                    : context.read<Wish>().addWishItem(
+                                          widget.proList['productname'],
+                                          widget.proList['price'],
+                                          1,
+                                          widget.proList['instock'],
+                                          widget.proList['productimages'],
+                                          widget.proList['productid'],
+                                          widget.proList['sid'],
+                                        );
+                              },
+                              icon: context
+                                          .watch<Wish>()
+                                          .getWishItems
+                                          .firstWhereOrNull((product) =>
+                                              product.documentId ==
+                                              widget.proList['productid']) !=
+                                      null
+                                  ? const Icon(
+                                      Icons.favorite,
+                                      color: Colors.red,
+                                    )
+                                  : const Icon(
+                                      Icons.favorite_outline,
+                                      color: Colors.red,
+                                    )),
                         ],
                       ),
                       Text(
@@ -161,7 +198,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       Text(
                         widget.proList['productdescription'],
                         textScaleFactor: 1.2,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 20, fontWeight: FontWeight.w600),
                       ),
                       const productDetailsHeader(
@@ -259,14 +296,37 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                         back: AppBarBackButton(),
                                       )));
                         },
-                        icon: const Icon(
-                          Icons.shopping_cart,
+                        icon: Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: badges.Badge(
+                              badgeStyle: const BadgeStyle(
+                                badgeColor: Colors.yellow,
+                              ),
+                              showBadge: context.read<Cart>().getItems.isEmpty
+                                  ? false
+                                  : true,
+                              badgeContent: Text(
+                                context
+                                    .watch<Cart>()
+                                    .getItems
+                                    .length
+                                    .toString(),
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              child: const Icon(
+                                Icons.shopping_cart_outlined,
+                              )),
                         ),
                       ),
                     ],
                   ),
                   YellowButton(
-                    label: 'ADD TO CART',
+                    label:
+                        existInCart != null ? 'ADDED TO CART' : 'ADD TO CART',
                     onPressed: () {
                       context.read<Cart>().getItems.firstWhereOrNull(
                                   (product) =>

@@ -4,6 +4,7 @@ import 'package:ecom/auth/supplierLogin.dart';
 import 'package:ecom/auth/supplier_signup.dart';
 import 'package:ecom/firebase_options.dart';
 import 'package:ecom/providers/cart_provider.dart';
+import 'package:ecom/providers/wish_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:ecom/main_screen/WelcomeScreen.dart';
 import 'package:ecom/main_screen/customer_home.dart';
@@ -19,6 +20,9 @@ void main() async {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
       create: (_) => Cart(),
+    ),
+    ChangeNotifierProvider(
+      create: (_) => Wish(),
     )
   ], child: const MyApp()));
 }

@@ -131,7 +131,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                     ),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const CartScreen(
+                                          back: AppBarBackButton(),
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                               Container(
