@@ -93,3 +93,10 @@ to add button for contacting supplier
 
 
 for the state management i use provide   . in this project i use badge [packgae to add badge and numbering to cart screen and cart icon . 
+
+
+in the payment there are many option  in which i use RadioTile List ------------->>>>>>..it accept three value
+1 ------value                     ------ this is use to numbering of option in radiolist tile
+2--------group                    ------- this option is use for choice all group have must same value
+3--------onChanged                ------- in  this we set function
+4------ttile -----------------it is provided to write the title 
