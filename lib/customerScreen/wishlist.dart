@@ -3,9 +3,6 @@
 // ignore: file_names
 // ignore: file_names
 import 'package:ecom/Models/wishModel.dart';
-import 'package:ecom/main_screen/customer_home.dart';
-import 'package:ecom/providers/cart_provider.dart';
-import 'package:ecom/providers/product_class.dart';
 
 import 'package:ecom/providers/wish_provider.dart';
 import 'package:ecom/widgets/AppBarWidgets.dart';
@@ -13,7 +10,6 @@ import 'package:ecom/widgets/alert_dialogue.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
-import 'package:collection/collection.dart';
 
 import 'package:provider/provider.dart';
 
