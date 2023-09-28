@@ -17,11 +17,11 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  CollectionReference customers =
+      FirebaseFirestore.instance.collection('customers');
+
   @override
   Widget build(BuildContext context) {
-    CollectionReference customers =
-        FirebaseFirestore.instance.collection('customers');
-
     return FutureBuilder<DocumentSnapshot>(
       future: customers.doc(widget.documentId).get(),
       builder:

@@ -4,6 +4,7 @@
 // ignore: file_names
 import 'package:ecom/Models/cartModel.dart';
 import 'package:ecom/main_screen/customer_home.dart';
+import 'package:ecom/minor_screen/placeOrder.dart';
 import 'package:ecom/providers/cart_provider.dart';
 import 'package:ecom/widgets/AppBarWidgets.dart';
 import 'package:ecom/widgets/YelloButton.dart';
@@ -23,6 +24,8 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
+    double total = context.watch<Cart>().totalPrice;
+
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
@@ -66,7 +69,7 @@ class _CartScreenState extends State<CartScreen> {
                 style: TextStyle(fontSize: 18),
               ),
               Text(
-                context.watch<Cart>().totalPrice.toStringAsFixed(2),
+                total.toStringAsFixed(2),
                 style: const TextStyle(
                     fontSize: 20,
                     color: Colors.red,
@@ -74,7 +77,28 @@ class _CartScreenState extends State<CartScreen> {
               ),
             ],
           ),
-          YellowButton(label: "CHECK OUT", onPressed: () {}, width: 0.45)
+          Container(
+              height: 35,
+              width: MediaQuery.of(context).size.width * 0.45,
+              decoration: BoxDecoration(
+                  color: Colors.yellow,
+                  borderRadius: BorderRadius.circular(25)),
+              child: MaterialButton(
+                onPressed: total == 0
+                    ? null
+                    : () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PlacemOrderScreen(),
+                          ),
+                        );
+                      },
+                child: const Text(
+                  'CHECK OUT',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ))
         ]),
       ),
     );
