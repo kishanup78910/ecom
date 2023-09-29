@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecom/minor_screen/PaymentScreen.dart';
 import 'package:ecom/providers/cart_provider.dart';
 import 'package:ecom/widgets/AppBarWidgets.dart';
 import 'package:ecom/widgets/YelloButton.dart';
@@ -19,6 +20,7 @@ class _PlacemOrderScreenState extends State<PlacemOrderScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var totalPrice = context.watch<Cart>().totalPrice;
     return FutureBuilder<DocumentSnapshot>(
         future: customers.doc(FirebaseAuth.instance.currentUser!.uid).get(),
         builder:
@@ -174,9 +176,14 @@ class _PlacemOrderScreenState extends State<PlacemOrderScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: YellowButton(
-                      label: 'Confirm',
+                      label: 'Confirm   ${totalPrice.toStringAsFixed(2)}   USD',
                       width: 1,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PaymentScreen()));
+                      },
                     ),
                   ),
                 ),

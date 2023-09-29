@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecom/Models/productsModel.dart';
 import 'package:ecom/main_screen/CartScreen.dart';
@@ -183,14 +185,22 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                     )),
                         ],
                       ),
-                      Text(
-                        (widget.proList['quantity'].toString()) +
-                            (' pieces avaialble in stock'),
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.blueGrey,
-                        ),
-                      ),
+                      widget.proList['instock'] == 0
+                          ? const Text(
+                              "this Item is out of stock",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          : Text(
+                              (widget.proList['instock'].toString()) +
+                                  (' pieces avaialble in stock'),
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: Colors.blueGrey,
+                              ),
+                            ),
                       const productDetailsHeader(
                         label: '   Item Description   ',
                       ),
@@ -327,22 +337,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     label:
                         existInCart != null ? 'ADDED TO CART' : 'ADD TO CART',
                     onPressed: () {
-                      context.read<Cart>().getItems.firstWhereOrNull(
-                                  (product) =>
-                                      product.documentId ==
-                                      widget.proList['productid']) !=
-                              null
-                          ? myMessageHnadler.showSnackBar(
-                              _scaffoldKey, 'This Item is already in your cart')
-                          : context.read<Cart>().addItem(
-                                widget.proList['productname'],
-                                widget.proList['price'],
-                                1,
-                                widget.proList['instock'],
-                                widget.proList['productimages'],
-                                widget.proList['productid'],
-                                widget.proList['sid'],
-                              );
+                      if (widget.proList['instock'] == 0) {
+                      } else if (existInCart != null) {
+                        myMessageHnadler.showSnackBar(
+                            _scaffoldKey, 'This Item is already in your cart');
+                      } else {
+                        context.read<Cart>().addItem(
+                              widget.proList['productname'],
+                              widget.proList['price'],
+                              1,
+                              widget.proList['instock'],
+                              widget.proList['productimages'],
+                              widget.proList['productid'],
+                              widget.proList['sid'],
+                            );
+                      }
                     },
                     width: 0.55,
                   ),

@@ -5,9 +5,6 @@ import 'package:ecom/main_screen/home.dart';
 import 'package:ecom/main_screen/profileScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:collection/collection.dart';
-import 'package:badges/badges.dart' as badges;
-import 'package:badges/badges.dart';
 
 class CustomerHomeScreen extends StatefulWidget {
   const CustomerHomeScreen({super.key});

@@ -1,5 +1,6 @@
 // ignore: file_names
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecom/customerScreen/customer_order.dart';
 import 'package:ecom/customerScreen/wishlist.dart';
 import 'package:ecom/main_screen/CartScreen.dart';
 import 'package:ecom/widgets/AppBarWidgets.dart';
@@ -166,9 +167,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => const CartScreen(
-                                          back: AppBarBackButton(),
-                                        ),
+                                        builder: (context) =>
+                                            const CustomerOrders(),
                                       ),
                                     );
                                   },
