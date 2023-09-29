@@ -117,3 +117,6 @@ I use expansion tile for seeing the order in orders .
 
 ![1](https://github.com/kishanup78910/ecom/assets/79304976/bba1cd1d-13e3-4783-8907-89107c89d2e4)
 ![2](https://github.com/kishanup78910/ecom/assets/79304976/bc27a21d-ce03-435a-8d42-96f305329237)
+
+
+I use intl package to format the date and time in supplier order model because supplier order model show the order date i nedd to format that .
