@@ -120,3 +120,7 @@ I use expansion tile for seeing the order in orders .
 
 
 I use intl package to format the date and time in supplier order model because supplier order model show the order date i nedd to format that .
+
+
+
+i use a package called flutter date time picker for picking date .
