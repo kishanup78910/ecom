@@ -1,28 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ecom/Models/productsModel.dart';
+import 'package:ecom/Models/supplierModelOrder.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
-import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
-
-class AceesoriesGalleryScreen extends StatefulWidget {
-  const AceesoriesGalleryScreen({super.key});
-
-  @override
-  State<AceesoriesGalleryScreen> createState() =>
-      _AceesoriesGalleryScreenState();
-}
-
-class _AceesoriesGalleryScreenState extends State<AceesoriesGalleryScreen> {
-  final Stream<QuerySnapshot> _productStream = FirebaseFirestore.instance
-      .collection('products')
-      .where('maincategory', isEqualTo: 'accessories')
-      .snapshots();
+class Shipping extends StatelessWidget {
+  const Shipping({super.key});
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: _productStream,
+      stream: FirebaseFirestore.instance
+          .collection('orders')
+          .where('sid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+          .where('deliveryStatus', isEqualTo: 'shipping')
+          .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           return const Center(
@@ -47,7 +38,7 @@ class _AceesoriesGalleryScreenState extends State<AceesoriesGalleryScreen> {
         if (snapshot.data!.docs.isEmpty) {
           return const Center(
             child: Text(
-              'This category has \n \n no items yet',
+              'You have not \n \n active order !',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 26,
@@ -58,21 +49,13 @@ class _AceesoriesGalleryScreenState extends State<AceesoriesGalleryScreen> {
             ),
           );
         }
-
-        return SingleChildScrollView(
-          child: StaggeredGridView.countBuilder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
+        return ListView.builder(
             itemCount: snapshot.data!.docs.length,
-            crossAxisCount: 2,
             itemBuilder: (context, index) {
-              return productModel(
-                products: snapshot.data!.docs[index],
+              return SupplierOrderModel(
+                order: snapshot.data!.docs[index],
               );
-            },
-            staggeredTileBuilder: (context) => const StaggeredTile.fit(1),
-          ),
-        );
+            });
       },
     );
   }
