@@ -43,7 +43,7 @@ class CartModel extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          product.price.toString(),
+                          product.price.toStringAsFixed(2),
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

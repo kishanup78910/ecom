@@ -23,7 +23,7 @@ List<Widget> pages = [
   const SupplierOrder(),
   const EditBusiness(),
   const ManageProducts(),
-  const SupplierBlance(),
+  const Balance(),
   const SupplierStatics()
 ];
 
