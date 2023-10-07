@@ -124,3 +124,8 @@ I use intl package to format the date and time in supplier order model because s
 
 
 i use a package called flutter date time picker for picking date .
+
+
+
+
+I use the package called flutter pub add flutter_rating_bar     for add rating of user to the product
